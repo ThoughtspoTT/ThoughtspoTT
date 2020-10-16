@@ -1,8 +1,6 @@
 package com.thoughtspott.app;
 
-//edit
-//edit again
-//edit again redux
+// delete this
 
 import android.os.Bundle;
 
