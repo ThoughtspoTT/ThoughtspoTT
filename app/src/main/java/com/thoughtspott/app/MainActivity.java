@@ -1,11 +1,6 @@
 package com.thoughtspott.app;
 
-// woooo
-//this is ana
-// TEST
-// pushing
-
-// PS5ORXBO
+// qwertyuiop
 
 
 import android.os.Bundle;
