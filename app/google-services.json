@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1073313712511",
+    "firebase_url": "https://thoughtspott.firebaseio.com",
+    "project_id": "thoughtspott",
+    "storage_bucket": "thoughtspott.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1073313712511:android:d9744d5c0095eebc00b24a",
+        "android_client_info": {
+          "package_name": "com.thoughtspott.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1073313712511-785p1npgt359cs50kescsoutn4f6bve8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxacbf5QJYiRlz1vKxOj8zITtOXJlufi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1073313712511-785p1npgt359cs50kescsoutn4f6bve8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
