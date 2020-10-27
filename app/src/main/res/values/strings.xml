@@ -17,4 +17,5 @@
     <string name="editTextLastName"></string>
     <string name="TextTextEmailAddress">Email Address</string>
     <string name="edit_text_text_password2">Password</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
