@@ -1,0 +1,3 @@
+diff --git app/src/main/res/drawable/homepage.xml app/src/main/res/layout/homepage.xml
+rename from app/src/main/res/drawable/homepage.xml
+rename to app/src/main/res/layout/homepage.xml
