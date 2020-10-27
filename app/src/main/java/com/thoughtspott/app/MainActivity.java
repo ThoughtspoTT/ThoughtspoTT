@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         LogIn_SI = findViewById(R.id.buttonLogInLI);
         progressDialog = new ProgressDialog(this);
         SignUp_SI= findViewById(R.id.buttonRegisterLI);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
 
