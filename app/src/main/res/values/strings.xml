@@ -11,10 +11,8 @@
     <string name="editTextPassword">Password</string>
     <string name="button_login">Login</string>
     <string name="text_view_not_registered">Not Registered?</string>
-    <string name="button_register">Register</string>
+    <string name="button_register">Log In</string>
     <string name="textRegistrationTitle">Register</string>
-    <string name="editTextFirstName"></string>
-    <string name="editTextLastName"></string>
     <string name="TextTextEmailAddress">Email Address</string>
     <string name="edit_text_text_password2">Password</string>
 </resources>
