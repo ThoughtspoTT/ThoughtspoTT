@@ -15,10 +15,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDujnsVl0OA-fdMaNFKO7_Dc7brbvCPszU">
         </meta-data>
-        <activity
-            android:name=".Homepage"
-            android:label="@string/title_activity_homepage"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
