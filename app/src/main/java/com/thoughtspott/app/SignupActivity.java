@@ -100,7 +100,7 @@ public class SignupActivity extends AppCompatActivity {
             email_SU.setError("Invalid Email");
             return;
         }
-
+        final String emailGood = email; // on success, finalize email to use below
         progressDialog.setMessage("Please Wait...");
         progressDialog.show();
         progressDialog.setCanceledOnTouchOutside(false);
@@ -108,7 +108,8 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                if(task.isSuccessful()){
-                   // add user to db here
+                   Student student = new Student(emailGood); // add user to db here
+                   student.writeToDB();
                    Toast.makeText(SignupActivity.this,"Successfully Registered",Toast.LENGTH_LONG).show();
                    Intent intent = new Intent(SignupActivity.this, DashboardActivity.class);
                    startActivity(intent);
