@@ -46,3 +46,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.4.0'
 
 }
+
+dependencies {
+    compile 'com.android.support:multidex:1.0.1' //enter the latest version
+}
+android {
+    defaultConfig {
+        multiDexEnabled true
+    }
+}

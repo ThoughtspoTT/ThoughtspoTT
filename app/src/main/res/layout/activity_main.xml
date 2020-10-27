@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/textviewWelcome"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="?attr/actionBarSize">
+
+    <TextView
+        android:id="@+id/textViewSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/welcome_to_thoughtspott"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.08" />
+
+    <EditText
+        android:id="@+id/editTextEmailSU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="464dp"
+        android:ems="10"
+        android:hint="@string/editTextEmail"
+        android:inputType="text|textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewSignUp"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/textViewSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSignUp" />
+
+    <EditText
+        android:id="@+id/editTextTextPasswordSU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="@string/editTextPassword"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmailSU"
+        app:layout_constraintVertical_bias="0.119" />
+
+    <Button
+        android:id="@+id/buttonSignUpSU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="loginclk"
+        android:text="@string/button_login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTextPasswordSU"
+        app:layout_constraintStart_toStartOf="@+id/editTextTextPasswordSU"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPasswordSU"
+        app:layout_constraintVertical_bias="0.217" />
+
+    <TextView
+        android:id="@+id/textView2SU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/text_view_not_registered"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/buttonSignUpSU"
+        app:layout_constraintStart_toStartOf="@+id/buttonSignUpSU"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSignUpSU"
+        app:layout_constraintVertical_bias="0.181" />
+
+    <Button
+        android:id="@+id/buttonLogInSU"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/button_register"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView2SU"
+        app:layout_constraintStart_toStartOf="@+id/textView2SU"
+        android:onClick="onBtnRegisterClick"
+        app:layout_constraintTop_toBottomOf="@+id/textView2SU" />
+</androidx.constraintlayout.widget.ConstraintLayout>
