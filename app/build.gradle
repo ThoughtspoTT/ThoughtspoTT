@@ -48,7 +48,9 @@ dependencies {
 }
 
 dependencies {
-    compile 'com.android.support:multidex:1.0.1' //enter the latest version
+
+    implementation 'com.google.android.gms:play-services-location:17.1.0'
+    implementation 'com.android.support:multidex:1.0.1' //enter the latest version
 }
 android {
     defaultConfig {
