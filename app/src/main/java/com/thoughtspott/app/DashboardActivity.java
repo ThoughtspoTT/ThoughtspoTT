@@ -2,6 +2,7 @@ package com.thoughtspott.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +18,13 @@ public class DashboardActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
+        map = (ImageButton) findViewById(R.id.map);
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMapActivity();
+            }
+        });
         logout = (ImageButton) findViewById(R.id.imageButton);
         logout.setOnClickListener(new OnClickListener(){
         @Override
@@ -28,5 +36,9 @@ public class DashboardActivity extends Activity {
 
             }
         });
+    }
+    public void openMapActivity(){
+        Intent MapIntent = new Intent(this, MapsActivity.class);
+        startActivity(MapIntent);
     }
 }
