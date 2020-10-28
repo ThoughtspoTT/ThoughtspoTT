@@ -12,6 +12,22 @@ public class DashboardActivity extends Activity {
     private Button logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.dashboard);
+        //logout = findViewById(R.id.buttonLogOut);
+        //logout.setOnClickListener(new View.OnClickListener(){
+        //@Override
+        //public void onClick(View v){
+          //  FirebaseAuth.getInstance().signOut();
+          //  Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
+          //  startActivity(intent);
+          //  finish();
 
+
+        //}
+
+        }
+    //)
+    ;
     }
-}
+//}
