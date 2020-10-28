@@ -21,14 +21,16 @@ public class Session {
     int population;
     LatLng location;
     Timestamp timeStart;
+    String description;
 
-    public Session(String c, Student crtr, LatLng loc, Timestamp time){
+    public Session(String c, Student crtr, LatLng loc, Timestamp time, String desc){
         course = c;
         creator = crtr;
         participants.add(creator);
         population = 1;
         location = loc;
         timeStart = time;
+        description = desc;
     }
 
     public void addMember(Student member){
@@ -37,6 +39,7 @@ public class Session {
         writeToDB();
     }
 
+    // true if removed successfully
     public boolean removeMember(Student member){
         for(int i = 0; i < population; i++){
             if(participants.get(i) == member){
@@ -59,7 +62,8 @@ public class Session {
         session.put("Participants", participants);
         session.put("Population", population);
         session.put("Location", location);
-        session.put("timeStart", timeStart);
+        session.put("TimeStart", timeStart);
+        session.put("Description", description);
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Sessions").document(course+" ("+creator+")")
