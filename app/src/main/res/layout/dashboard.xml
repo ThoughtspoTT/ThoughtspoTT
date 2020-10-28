@@ -40,11 +40,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/ThoughtspoTT"
                 app:layout_constraintStart_toStartOf="@+id/ThoughtspoTT"
-                app:srcCompat="@android:drawable/ic_menu_add"
+                android:src="@android:drawable/ic_menu_add"
                 tools:visibility="visible" />
 
             <ImageButton
-                android:id="@+id/imageButton8"
+                android:id="@+id/Profile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="190dp"
@@ -54,7 +54,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/ThoughtspoTT"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.591"
-                app:srcCompat="@android:drawable/ic_menu_my_calendar"
+                android:src="@android:drawable/ic_menu_my_calendar"
                 tools:visibility="visible" />
 
             <ImageButton
@@ -66,7 +66,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/imageButton3"
                 app:layout_constraintEnd_toEndOf="@+id/imageButton7"
                 app:layout_constraintStart_toStartOf="@+id/imageButton7"
-                app:srcCompat="@android:drawable/ic_lock_power_off"
+                android:src="@android:drawable/ic_lock_power_off"
                 tools:visibility="visible" />
 
             <ImageButton
@@ -78,7 +78,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/imageButton7"
                 app:layout_constraintEnd_toEndOf="@+id/imageButton4"
                 app:layout_constraintStart_toStartOf="@+id/imageButton4"
-                app:srcCompat="@android:drawable/ic_menu_today"
+                android:src="@android:drawable/ic_menu_today"
                 tools:visibility="visible" />
 
             <ImageButton
@@ -88,9 +88,9 @@
                 android:layout_marginBottom="40dp"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/imageButton5"
-                app:layout_constraintEnd_toEndOf="@+id/imageButton8"
-                app:layout_constraintStart_toStartOf="@+id/imageButton8"
-                app:srcCompat="@android:drawable/sym_action_chat"
+                app:layout_constraintEnd_toEndOf="@+id/Profile"
+                app:layout_constraintStart_toStartOf="@+id/Profile"
+                android:src="@android:drawable/sym_action_chat"
                 tools:visibility="visible" />
 
             <ImageButton
@@ -102,7 +102,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/imageButton"
                 app:layout_constraintEnd_toEndOf="@+id/imageButton5"
                 app:layout_constraintStart_toStartOf="@+id/imageButton5"
-                app:srcCompat="@android:drawable/ic_dialog_map"
+                android:src="@android:drawable/ic_dialog_map"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
