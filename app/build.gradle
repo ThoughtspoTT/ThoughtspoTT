@@ -55,6 +55,12 @@ dependencies {
     implementation 'com.android.support:multidex:2.0.1' //enter the latest version
 }
 android {
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+}
+android {
     defaultConfig {
         multiDexEnabled true
     }
