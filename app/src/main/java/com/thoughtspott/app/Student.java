@@ -15,16 +15,15 @@ import java.util.Map;
 public class Student {
     String authID;
     String email;
-    String[] courses = new String[6];
+    String[] courses = {"course0", "course1", "course2", "course3", "course4", "course5"};
     
 
     public Student(String studentEmail){
         email = studentEmail;
-        String[] courses = {"course0", "course1", "course2", "course3", "course4", "course5"};
     }
 
     public void writeToDB(){
-        Map<String, String> student = new HashMap<>();     // create HashMap for easy db writing
+        HashMap<String, String> student = new HashMap<>();     // create HashMap for easy db writing
         // put all info in map
         student.put("Email", email);
         for(int i = 0; i < 6 && (!courses[i].equals(null) && !courses[i].equals("")); i++)
