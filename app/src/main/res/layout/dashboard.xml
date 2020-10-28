@@ -24,20 +24,24 @@
                 android:layout_marginBottom="660dp"
                 android:text="ThoughtspoTT"
                 android:textSize="24sp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
 
             <ImageButton
                 android:id="@+id/imageButton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50dp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/ThoughtspoTT"
                 app:layout_constraintStart_toStartOf="@+id/ThoughtspoTT"
-                app:srcCompat="@android:drawable/ic_menu_add" />
+                app:srcCompat="@android:drawable/ic_menu_add"
+                tools:visibility="visible" />
 
             <ImageButton
                 android:id="@+id/imageButton8"
@@ -45,51 +49,61 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="190dp"
                 android:layout_marginRight="190dp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/imageButton4"
                 app:layout_constraintEnd_toEndOf="@+id/ThoughtspoTT"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.591"
-                app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+                app:srcCompat="@android:drawable/ic_menu_my_calendar"
+                tools:visibility="visible" />
 
             <ImageButton
                 android:id="@+id/imageButton"
                 android:layout_width="55dp"
                 android:layout_height="49dp"
                 android:layout_marginBottom="92dp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/imageButton3"
                 app:layout_constraintEnd_toEndOf="@+id/imageButton7"
                 app:layout_constraintStart_toStartOf="@+id/imageButton7"
-                app:srcCompat="@android:drawable/ic_lock_power_off" />
+                app:srcCompat="@android:drawable/ic_lock_power_off"
+                tools:visibility="visible" />
 
             <ImageButton
                 android:id="@+id/imageButton5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="44dp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/imageButton7"
                 app:layout_constraintEnd_toEndOf="@+id/imageButton4"
                 app:layout_constraintStart_toStartOf="@+id/imageButton4"
-                app:srcCompat="@android:drawable/ic_menu_today" />
+                app:srcCompat="@android:drawable/ic_menu_today"
+                tools:visibility="visible" />
 
             <ImageButton
                 android:id="@+id/imageButton4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/imageButton5"
                 app:layout_constraintEnd_toEndOf="@+id/imageButton8"
                 app:layout_constraintStart_toStartOf="@+id/imageButton8"
-                app:srcCompat="@android:drawable/sym_action_chat" />
+                app:srcCompat="@android:drawable/sym_action_chat"
+                tools:visibility="visible" />
 
             <ImageButton
                 android:id="@+id/imageButton7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
+                android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/imageButton"
                 app:layout_constraintEnd_toEndOf="@+id/imageButton5"
                 app:layout_constraintStart_toStartOf="@+id/imageButton5"
-                app:srcCompat="@android:drawable/ic_dialog_map" />
+                app:srcCompat="@android:drawable/ic_dialog_map"
+                tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
