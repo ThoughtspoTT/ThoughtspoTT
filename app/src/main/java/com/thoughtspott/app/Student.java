@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Student {
-    String authID;
     String email;
     String courses[] = new String[]{"course0", "course1", "course2", "course3", "course4", "course5"};
     
@@ -28,7 +27,6 @@ public class Student {
         List clist = Arrays.asList(courses);
         // put all info in map
         student.put("Email", email);
-        //for(int i = 0; i < 6 && !courses[i].equals(""); i++)
         student.put("Courses", clist);
 
         // write the map to Students collection in the Firestore db:

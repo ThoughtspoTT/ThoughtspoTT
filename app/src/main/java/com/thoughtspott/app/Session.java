@@ -1,9 +1,18 @@
 package com.thoughtspott.app;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.type.LatLng;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Session {
     String course;
@@ -12,21 +21,20 @@ public class Session {
     int population;
     LatLng location;
     Timestamp timeStart;
-    boolean isPrivate;
 
-    public Session(String c, Student crtr, LatLng loc, Timestamp time, boolean priv){
+    public Session(String c, Student crtr, LatLng loc, Timestamp time){
         course = c;
         creator = crtr;
         participants.add(creator);
         population = 1;
         location = loc;
         timeStart = time;
-        isPrivate = priv;
     }
 
     public void addMember(Student member){
         participants.add(member);
         population++;
+        writeToDB();
     }
 
     public boolean removeMember(Student member){
@@ -34,9 +42,39 @@ public class Session {
             if(participants.get(i) == member){
                 participants.remove(i);
                 population--;
+                writeToDB();
                 return true;
             }
         }
         return false;
+    }
+    public void removeSession(){
+
+    }
+
+    public void writeToDB(){
+        HashMap<String, Object> session = new HashMap<>();
+        session.put("Course", course);
+        session.put("Creator", creator);
+        session.put("Participants", participants);
+        session.put("Population", population);
+        session.put("Location", location);
+        session.put("timeStart", timeStart);
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("Sessions").document(course+" ("+creator+")")
+                .set(session)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("Session.java", "DocumentSnapshot written successfully");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w("Session.java", "Error adding document to Sessions", e);
+                    }
+                });
     }
 }
