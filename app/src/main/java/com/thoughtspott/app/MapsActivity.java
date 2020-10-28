@@ -35,7 +35,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        assert mapFragment != null;
+        mapFragment.getMapAsync(this);
 
+        /*
         client = LocationServices.getFusedLocationProviderClient(this);
 
         if (ActivityCompat.checkSelfPermission(MapsActivity.this,
@@ -45,8 +48,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             ActivityCompat.requestPermissions(MapsActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
         }
-        assert mapFragment != null;
-        mapFragment.getMapAsync(this);
+
     }
 
     private void getCurrentLocation() {
@@ -90,6 +92,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getCurrentLocation();
             }
         }
+
+ */
     }
 
     @Override
