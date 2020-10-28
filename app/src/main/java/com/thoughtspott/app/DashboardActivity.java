@@ -17,7 +17,7 @@ public class DashboardActivity extends Activity {
         setContentView(R.layout.dashboard);
 
         //Map button
-        map = (ImageButton) findViewById(R.id.map);
+        map = (ImageButton) findViewById(R.id.mapbutton);
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
