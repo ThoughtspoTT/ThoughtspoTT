@@ -3,11 +3,12 @@ package com.thoughtspott.app;
 import com.google.type.LatLng;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public class Session {
     String course;
     Student creator;
-    String[] participants;
+    ArrayList<Student> participants = new ArrayList<>();
     int population;
     LatLng location;
     Timestamp timeStart;
@@ -20,5 +21,21 @@ public class Session {
         location = loc;
         timeStart = time;
         isPrivate = priv;
+    }
+
+    public void addMember(Student member){
+        participants.add(member);
+        population++;
+    }
+
+    public boolean removeMember(Student member){
+        for(int i = 0; i < population; i++){
+            if(participants.get(i) == member){
+                participants.remove(i);
+                population--;
+                return true;
+            }
+        }
+        return false;
     }
 }
