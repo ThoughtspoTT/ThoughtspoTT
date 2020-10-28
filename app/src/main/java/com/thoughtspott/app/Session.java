@@ -17,6 +17,7 @@ public class Session {
     public Session(String c, Student crtr, LatLng loc, Timestamp time, boolean priv){
         course = c;
         creator = crtr;
+        participants.add(creator);
         population = 1;
         location = loc;
         timeStart = time;
