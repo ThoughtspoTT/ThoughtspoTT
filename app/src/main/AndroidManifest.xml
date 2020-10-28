@@ -27,6 +27,7 @@
         </activity>
         <activity android:name=".SignupActivity" />
         <activity android:name=".DashboardActivity" />
+        <activity android:name=".MapsActivity"/>
     </application>
 
 </manifest>
