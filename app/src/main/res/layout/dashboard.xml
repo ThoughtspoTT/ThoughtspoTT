@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/button"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
@@ -32,77 +33,77 @@
                 tools:visibility="visible" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/addeventbutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="50dp"
+                android:src="@android:drawable/ic_menu_add"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/ThoughtspoTT"
                 app:layout_constraintStart_toStartOf="@+id/ThoughtspoTT"
-                app:srcCompat="@android:drawable/ic_menu_add"
                 tools:visibility="visible" />
 
             <ImageButton
-                android:id="@+id/imageButton8"
+                android:id="@+id/profilebutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="190dp"
                 android:layout_marginRight="190dp"
+                android:src="@android:drawable/ic_menu_my_calendar"
                 android:visibility="visible"
-                app:layout_constraintBottom_toTopOf="@+id/imageButton4"
+                app:layout_constraintBottom_toTopOf="@+id/messagebutton"
                 app:layout_constraintEnd_toEndOf="@+id/ThoughtspoTT"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.591"
-                app:srcCompat="@android:drawable/ic_menu_my_calendar"
                 tools:visibility="visible" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/logoutbutton"
                 android:layout_width="55dp"
                 android:layout_height="49dp"
                 android:layout_marginBottom="92dp"
+                android:src="@android:drawable/ic_lock_power_off"
                 android:visibility="visible"
-                app:layout_constraintBottom_toTopOf="@+id/imageButton3"
-                app:layout_constraintEnd_toEndOf="@+id/imageButton7"
-                app:layout_constraintStart_toStartOf="@+id/imageButton7"
-                app:srcCompat="@android:drawable/ic_lock_power_off"
+                app:layout_constraintBottom_toTopOf="@+id/addeventbutton"
+                app:layout_constraintEnd_toEndOf="@+id/mapbutton"
+                app:layout_constraintStart_toStartOf="@+id/mapbutton"
                 tools:visibility="visible" />
 
             <ImageButton
-                android:id="@+id/imageButton5"
+                android:id="@+id/calendarbutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="44dp"
+                android:src="@android:drawable/ic_menu_today"
                 android:visibility="visible"
-                app:layout_constraintBottom_toTopOf="@+id/imageButton7"
-                app:layout_constraintEnd_toEndOf="@+id/imageButton4"
-                app:layout_constraintStart_toStartOf="@+id/imageButton4"
-                app:srcCompat="@android:drawable/ic_menu_today"
+                app:layout_constraintBottom_toTopOf="@+id/mapbutton"
+                app:layout_constraintEnd_toEndOf="@+id/messagebutton"
+                app:layout_constraintStart_toStartOf="@+id/messagebutton"
                 tools:visibility="visible" />
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/messagebutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="40dp"
+                android:src="@android:drawable/sym_action_chat"
                 android:visibility="visible"
-                app:layout_constraintBottom_toTopOf="@+id/imageButton5"
-                app:layout_constraintEnd_toEndOf="@+id/imageButton8"
-                app:layout_constraintStart_toStartOf="@+id/imageButton8"
-                app:srcCompat="@android:drawable/sym_action_chat"
+                app:layout_constraintBottom_toTopOf="@+id/calendarbutton"
+                app:layout_constraintEnd_toEndOf="@+id/profilebutton"
+                app:layout_constraintStart_toStartOf="@+id/profilebutton"
                 tools:visibility="visible" />
 
             <ImageButton
-                android:id="@+id/imageButton7"
+                android:id="@+id/mapbutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
+                android:src="@android:drawable/ic_dialog_map"
                 android:visibility="visible"
-                app:layout_constraintBottom_toTopOf="@+id/imageButton"
-                app:layout_constraintEnd_toEndOf="@+id/imageButton5"
-                app:layout_constraintStart_toStartOf="@+id/imageButton5"
-                app:srcCompat="@android:drawable/ic_dialog_map"
+                app:layout_constraintBottom_toTopOf="@+id/logoutbutton"
+                app:layout_constraintEnd_toEndOf="@+id/calendarbutton"
+                app:layout_constraintStart_toStartOf="@+id/calendarbutton"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
