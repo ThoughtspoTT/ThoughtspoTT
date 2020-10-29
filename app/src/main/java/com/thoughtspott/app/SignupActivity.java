@@ -111,7 +111,7 @@ public class SignupActivity extends AppCompatActivity {
                    Student student = new Student(emailGood); // add user to db here
                    student.writeToDB();
                    Toast.makeText(SignupActivity.this,"Successfully Registered",Toast.LENGTH_LONG).show();
-                   Intent intent = new Intent(SignupActivity.this, DashboardActivity.class);
+                   Intent intent = new Intent(SignupActivity.this, EnterClasses.class);
                    startActivity(intent);
                    finish();
 
