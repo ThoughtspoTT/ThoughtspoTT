@@ -76,9 +76,9 @@ public class EnterClasses extends AppCompatActivity {
             classInput.add(class4);
 
         }
-        student.courses = classInput;
 
-        Intent intent = new Intent(EnterClasses.this, DashboardActivity.class);
+
+        Intent intent = new Intent(EnterClasses.this, Enter_Info.class);
         startActivity(intent);
         finish();
 
