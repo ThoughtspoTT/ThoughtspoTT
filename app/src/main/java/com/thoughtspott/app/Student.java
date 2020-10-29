@@ -9,25 +9,23 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 public class Student {
     String email;
-    String courses[] = new String[]{"course0", "course1", "course2", "course3", "course4", "course5"};
-    
+    //String courses[] = new String[]{"course0", "course1", "course2", "course3", "course4", "course5"};
+    ArrayList<String> courses = new ArrayList<>();
 
-    public Student(String studentEmail){
-        email = studentEmail;
-    }
 
     public void writeToDB(){
         HashMap<String, Object> student = new HashMap<>();     // create HashMap for easy db writing
-        List clist = Arrays.asList(courses);
+        //List clist = Arrays.asList(courses);
         // put all info in map
         student.put("Email", email);
-        student.put("Courses", clist);
+        student.put("Courses", courses);
 
         // write the map to Students collection in the Firestore db:
         FirebaseFirestore db = FirebaseFirestore.getInstance(); // new instance of db

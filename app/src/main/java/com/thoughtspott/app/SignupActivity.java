@@ -26,6 +26,8 @@ public class SignupActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,8 +73,8 @@ public class SignupActivity extends AppCompatActivity {
 
     }
 
-    private void Register(){
-
+    public void Register(){
+        Student student = new Student();
         String email = email_SU.getText().toString();
         String password1 = password1_SU.getText().toString();
         String password2 = password2_SU.getText().toString();
@@ -100,7 +102,8 @@ public class SignupActivity extends AppCompatActivity {
             email_SU.setError("Invalid Email");
             return;
         }
-        final String emailGood = email; // on success, finalize email to use below
+
+        student.email = email;
         progressDialog.setMessage("Please Wait...");
         progressDialog.show();
         progressDialog.setCanceledOnTouchOutside(false);
@@ -108,7 +111,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                if(task.isSuccessful()){
-                   Student student = new Student(emailGood); // add user to db here
+                   // add user to db here
                    student.writeToDB();
                    Toast.makeText(SignupActivity.this,"Successfully Registered",Toast.LENGTH_LONG).show();
                    Intent intent = new Intent(SignupActivity.this, EnterClasses.class);

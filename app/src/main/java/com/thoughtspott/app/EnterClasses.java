@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 public class EnterClasses extends AppCompatActivity {
 
 
@@ -33,6 +35,8 @@ public class EnterClasses extends AppCompatActivity {
 
                 enter_classes();
 
+
+
             }
 
 
@@ -42,11 +46,12 @@ public class EnterClasses extends AppCompatActivity {
 
     private void enter_classes(){
 
+        ArrayList<String> classInput = new ArrayList<>();
 
         String class1 = text_class1.getText().toString();
 
         if(!TextUtils.isEmpty(class1)){
-            // add to database
+            classInput.add(class1);
 
         }
 
@@ -54,24 +59,24 @@ public class EnterClasses extends AppCompatActivity {
         String class2 = text_class2.getText().toString();
 
         if(!TextUtils.isEmpty(class2)){
-            // add to database
+            classInput.add(class2);
 
         }
 
         String class3 = text_class3.getText().toString();
 
         if(!TextUtils.isEmpty(class3)){
-            // add to database
+            classInput.add(class3);
 
         }
 
         String class4 = text_class4.getText().toString();
 
         if(!TextUtils.isEmpty(class4)){
-            // add to database
+            classInput.add(class4);
 
         }
-
+        student.courses = classInput;
 
         Intent intent = new Intent(EnterClasses.this, DashboardActivity.class);
         startActivity(intent);
