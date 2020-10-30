@@ -18,6 +18,19 @@
             android:layout_height="match_parent"
             android:paddingTop="?attr/actionBarSize">
 
+            <include
+                android:id="@+id/ForumView"
+                layout="@layout/activity_forum"
+                android:layout_width="252dp"
+                android:layout_height="499dp"
+                android:layout_marginBottom="50dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.62"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.53" />
+
             <TextView
                 android:id="@+id/ThoughtspoTT"
                 android:layout_width="wrap_content"
@@ -48,25 +61,26 @@
                 android:id="@+id/profilebutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="190dp"
-                android:layout_marginRight="190dp"
+                android:layout_marginEnd="204dp"
+                android:layout_marginRight="204dp"
                 android:src="@android:drawable/ic_menu_my_calendar"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/messagebutton"
                 app:layout_constraintEnd_toEndOf="@+id/ThoughtspoTT"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.591"
+                app:layout_constraintVertical_bias="0.512"
                 tools:visibility="visible" />
 
             <ImageButton
                 android:id="@+id/logoutbutton"
                 android:layout_width="55dp"
                 android:layout_height="49dp"
-                android:layout_marginBottom="92dp"
+                android:layout_marginBottom="8dp"
                 android:src="@android:drawable/ic_lock_power_off"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/addeventbutton"
                 app:layout_constraintEnd_toEndOf="@+id/mapbutton"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/mapbutton"
                 tools:visibility="visible" />
 
@@ -74,11 +88,12 @@
                 android:id="@+id/calendarbutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="44dp"
+                android:layout_marginBottom="68dp"
                 android:src="@android:drawable/ic_menu_today"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/mapbutton"
                 app:layout_constraintEnd_toEndOf="@+id/messagebutton"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/messagebutton"
                 tools:visibility="visible" />
 
@@ -86,11 +101,12 @@
                 android:id="@+id/messagebutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="56dp"
                 android:src="@android:drawable/sym_action_chat"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/calendarbutton"
                 app:layout_constraintEnd_toEndOf="@+id/profilebutton"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/profilebutton"
                 tools:visibility="visible" />
 
@@ -98,13 +114,16 @@
                 android:id="@+id/mapbutton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="60dp"
                 android:src="@android:drawable/ic_dialog_map"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/logoutbutton"
                 app:layout_constraintEnd_toEndOf="@+id/calendarbutton"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/calendarbutton"
                 tools:visibility="visible" />
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

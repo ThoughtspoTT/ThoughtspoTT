@@ -12,12 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Enter_Info"></activity>
-        <activity android:name=".EnterClasses" />
+        <activity android:name=".EnterClasses"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDujnsVl0OA-fdMaNFKO7_Dc7brbvCPszU" />
+            android:value="AIzaSyDujnsVl0OA-fdMaNFKO7_Dc7brbvCPszU"></meta-data>
 
         <activity
             android:name=".MainActivity"
@@ -31,6 +30,7 @@
         <activity android:name=".SignupActivity" />
         <activity android:name=".DashboardActivity" />
         <activity android:name=".MapsActivity" />
+        <activity android:name=".Forum"/>
     </application>
 
 </manifest>

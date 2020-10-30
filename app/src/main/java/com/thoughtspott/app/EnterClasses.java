@@ -35,8 +35,6 @@ public class EnterClasses extends AppCompatActivity {
 
                 enter_classes();
 
-
-
             }
 
 
