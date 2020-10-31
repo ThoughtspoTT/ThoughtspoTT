@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -20,17 +21,25 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.sql.Timestamp;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient client;
+    Student Jacob = new Student();
+    LatLng latlngtest = new LatLng(33.581410,-101.876037);
+    Timestamp timetest = new Timestamp(2016-11-16);
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-
+        //writeToDB();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -95,14 +104,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
  */
     }
-
+    //void writeToDB() {
+      //  Session testsession = new Session("Physics",Jacob,latlngtest,timetest,"Study for midterm");
+    //}
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
         LatLng Lubbock = new LatLng(33.581410,  -101.876037);
-        mMap.addMarker(new MarkerOptions().position(Lubbock).title("Marker at Texas Tech"));
+        LatLng test = new LatLng(33.583644, -101.876275);
+        mMap.addMarker(new MarkerOptions().position(Lubbock).title("Physics").snippet("Created by Jacob, 10/31/2020 2:00 PM, Study for midterm"));
+        mMap.addMarker(new MarkerOptions().position(test).title("Chemistry").snippet("Created by Ana, 11/2/2020 5:00 PM, Homework 2"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(Lubbock));
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
     }
 }
