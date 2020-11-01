@@ -47,10 +47,12 @@
 
             <ImageButton
                 android:id="@+id/addeventbutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="59dp"
+                android:layout_height="52dp"
                 android:layout_marginBottom="50dp"
+                android:background="#CB0000"
                 android:src="@android:drawable/ic_menu_add"
+                android:tint="#000000"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/ThoughtspoTT"
@@ -59,11 +61,13 @@
 
             <ImageButton
                 android:id="@+id/profilebutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="61dp"
+                android:layout_height="47dp"
                 android:layout_marginEnd="204dp"
                 android:layout_marginRight="204dp"
+                android:background="#CB0000"
                 android:src="@android:drawable/ic_menu_my_calendar"
+                android:tint="#000000"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/messagebutton"
                 app:layout_constraintEnd_toEndOf="@+id/ThoughtspoTT"
@@ -76,7 +80,9 @@
                 android:layout_width="55dp"
                 android:layout_height="49dp"
                 android:layout_marginBottom="8dp"
+                android:background="#CB0000"
                 android:src="@android:drawable/ic_lock_power_off"
+                android:tint="#000000"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/addeventbutton"
                 app:layout_constraintEnd_toEndOf="@+id/mapbutton"
@@ -86,10 +92,12 @@
 
             <ImageButton
                 android:id="@+id/calendarbutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="57dp"
+                android:layout_height="50dp"
                 android:layout_marginBottom="68dp"
+                android:background="#CB0000"
                 android:src="@android:drawable/ic_menu_today"
+                android:tint="#000000"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/mapbutton"
                 app:layout_constraintEnd_toEndOf="@+id/messagebutton"
@@ -99,10 +107,12 @@
 
             <ImageButton
                 android:id="@+id/messagebutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="57dp"
+                android:layout_height="47dp"
                 android:layout_marginBottom="56dp"
+                android:background="#CB0000"
                 android:src="@android:drawable/sym_action_chat"
+                android:tint="#000000"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/calendarbutton"
                 app:layout_constraintEnd_toEndOf="@+id/profilebutton"
@@ -112,17 +122,18 @@
 
             <ImageButton
                 android:id="@+id/mapbutton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="55dp"
+                android:layout_height="50dp"
                 android:layout_marginBottom="60dp"
+                android:background="#CB0000"
                 android:src="@android:drawable/ic_dialog_map"
+                android:tint="#000000"
                 android:visibility="visible"
                 app:layout_constraintBottom_toTopOf="@+id/logoutbutton"
                 app:layout_constraintEnd_toEndOf="@+id/calendarbutton"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.652"
                 app:layout_constraintStart_toStartOf="@+id/calendarbutton"
                 tools:visibility="visible" />
-
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
