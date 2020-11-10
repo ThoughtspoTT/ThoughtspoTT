@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class Enter_Info extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class Enter_Info extends MainActivity {
 
     private EditText first_name, last_name, major, biography;
     private Button submit;
@@ -46,34 +48,35 @@ public class Enter_Info extends AppCompatActivity {
 
 
     private void enter_info(){
-
+        //ArrayList<String> infoInput = new ArrayList<>();
         String first_name_text = first_name.getText().toString();
 
         if(!TextUtils.isEmpty(first_name_text)){
-            //add to database
+            user.setNameFirst(first_name_text);
         }
 
         String last_name_text = last_name.getText().toString();
 
         if(!TextUtils.isEmpty(last_name_text)){
-            //add to database
+            user.setNameLast(last_name_text);
         }
 
         String major_text = major.getText().toString();
 
         if(!TextUtils.isEmpty(major_text)){
-            //add to database
+            user.setMajor(major_text);
+
         }
 
 
         String biography_text = biography.getText().toString();
 
         if(!TextUtils.isEmpty(biography_text)){
-            //add to database
+            user.setBio(biography_text);
         }
 
 
-
+        user.writeToDB();
         Intent intent = new Intent(Enter_Info.this, DashboardActivity.class);
         startActivity(intent);
         finish();

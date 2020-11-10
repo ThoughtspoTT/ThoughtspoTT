@@ -19,7 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class SignupActivity extends AppCompatActivity {
+
+public class SignupActivity extends MainActivity {
 
     private EditText email_SU, password1_SU, password2_SU;
     private Button SignUp_SU, LogIn_SU;
@@ -74,7 +75,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void Register(){
-        Student student = new Student();
+        //Student student = new Student();
         String email = email_SU.getText().toString();
         String password1 = password1_SU.getText().toString();
         String password2 = password2_SU.getText().toString();
@@ -103,7 +104,8 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-        student.email = email;
+        //student.email = email;
+        user.setEmail(email);
         progressDialog.setMessage("Please Wait...");
         progressDialog.show();
         progressDialog.setCanceledOnTouchOutside(false);
@@ -112,7 +114,7 @@ public class SignupActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                if(task.isSuccessful()){
                    // add user to db here
-                   student.writeToDB();
+                   user.writeToDB();
                    Toast.makeText(SignupActivity.this,"Successfully Registered",Toast.LENGTH_LONG).show();
                    Intent intent = new Intent(SignupActivity.this, EnterClasses.class);
                    startActivity(intent);
