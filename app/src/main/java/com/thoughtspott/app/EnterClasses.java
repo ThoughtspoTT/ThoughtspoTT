@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
-public class EnterClasses extends AppCompatActivity {
+public class EnterClasses extends MainActivity {
 
 
     private EditText text_class1, text_class2, text_class3, text_class4;
@@ -75,7 +75,7 @@ public class EnterClasses extends AppCompatActivity {
 
         }
 
-
+        user.setCourses(classInput);
         Intent intent = new Intent(EnterClasses.this, Enter_Info.class);
         startActivity(intent);
         finish();

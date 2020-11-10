@@ -32,7 +32,7 @@
         <activity android:name=".MapsActivity" />
         <activity android:name=".Forum"/>
         <activity android:name=".Enter_Info"/>
-        
+
     </application>
 
 </manifest>

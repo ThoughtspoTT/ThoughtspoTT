@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private Button SignUp_SI, LogIn_SI;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
-
+    protected static Student user = new Student();
 
 
     @Override
@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
     private void Login(){
         String email = email_SI.getText().toString();
         String password = password_SI.getText().toString();
-
         if(TextUtils.isEmpty(email)){
             email_SI.setError("Enter Your Email");
             return;
