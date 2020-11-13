@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class DashboardActivity extends Activity {
+public class DashboardActivity extends MainActivity {
     private ImageButton profile, message, map, calendar,addevent, logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
