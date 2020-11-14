@@ -1,6 +1,7 @@
 package com.thoughtspott.app;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -39,16 +40,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        //writeToDB();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+                .findFragmentById(R.id.google_map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
 
-        /*
         client = LocationServices.getFusedLocationProviderClient(this);
+
+        /*
 
         if (ActivityCompat.checkSelfPermission(MapsActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -57,9 +58,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             ActivityCompat.requestPermissions(MapsActivity.this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
         }
-
     }
-
     private void getCurrentLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -80,20 +79,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         public void onMapReady(GoogleMap googleMap) {
                             LatLng latLng = new LatLng(location.getLatitude()
                                 ,location.getLongitude());
-
                             MarkerOptions options = new MarkerOptions().position(latLng)
                                     .title("I am here");
                             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
                             googleMap.addMarker(options);
-
-
                         }
                     });
                 }
             }
         });
     }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, int[] grantResults) {
         if (requestCode ==44){
@@ -101,22 +96,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getCurrentLocation();
             }
         }
-
  */
     }
-    //void writeToDB() {
-      //  Session testsession = new Session("Physics",Jacob,latlngtest,timetest,"Study for midterm");
-    //}
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-        // Add a marker in Sydney and move the camera
         LatLng Lubbock = new LatLng(33.581410,  -101.876037);
         LatLng test = new LatLng(33.583644, -101.876275);
         mMap.addMarker(new MarkerOptions().position(Lubbock).title("Physics").snippet("Created by Jacob, 10/31/2020 2:00 PM, Study for midterm"));
         mMap.addMarker(new MarkerOptions().position(test).title("Chemistry").snippet("Created by Ana, 11/2/2020 5:00 PM, Homework 2"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(Lubbock));
-        mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
+
+
+        @SuppressLint("MissingPermission") Task<Location> task = client.getLastLocation();
+
+        task.addOnSuccessListener(location -> {
+
+            if (location != null){
+                LatLng latLng = new LatLng(location.getLatitude()
+                        ,location.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(latLng).title("Location").snippet("You are here"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
+
+            }
+            else
+            {
+                mMap.addMarker(new MarkerOptions().position(Lubbock).title("Pls").snippet("You absolute fool"));
+            }
+        });
     }
 }

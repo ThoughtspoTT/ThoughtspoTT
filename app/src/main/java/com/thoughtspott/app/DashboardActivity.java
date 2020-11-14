@@ -53,13 +53,13 @@ public class DashboardActivity extends MainActivity {
         //});
 
         //Profile button
-        //profile = (ImageButton) findViewById(R.id.profilebutton);
-        //profile.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        openProfileActivity();
-        //    }
-        //});
+        profile = (ImageButton) findViewById(R.id.profilebutton);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openProfileActivity();
+            }
+        });
 
         //Message button
         //message = (ImageButton) findViewById(R.id.messagebutton);
@@ -104,8 +104,8 @@ public class DashboardActivity extends MainActivity {
     //}
 
     //Profile button
-    //public void openProfileActivity(){
-    //  Intent ProfileIntent = new Intent(packageContent: this, #######.class);
-    //  startactivity(ProfileIntent);
-    //}
+    public void openProfileActivity(){
+      Intent ProfileIntent = new Intent(this, Profile.class);
+      startActivity(ProfileIntent);
+    }
 }
