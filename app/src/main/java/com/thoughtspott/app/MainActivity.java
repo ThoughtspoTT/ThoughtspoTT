@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -98,8 +101,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+                    user.setEmail(email);
                     // find the user in db
-                    user.findStudent(email);
+                    user.findStudent(new MyCallback() {
+                        @Override
+                        public void onCallback(Map<String, Object> dataResult) {
+                            user.setStudentFromDB(dataResult);
+                            Log.d("MainActivity", dataResult.toString());
+                            //user.setNameFirst(dataResult.get("FirstName").toString());
+                        }
+                    });
+
                     Toast.makeText(MainActivity.this,"Successful Log In",Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
                     startActivity(intent);

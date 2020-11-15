@@ -95,8 +95,9 @@ public class Student extends Application {
                     }
                 });
     }
-    private void setStudentFromDB(Map<String, Object> s){
+    public void setStudentFromDB(Map<String, Object> s){
         setEmail(s.get("Email").toString());
+
         setCourses((ArrayList<String>) s.get("Courses"));
 
         if(s.get("FirstName") != null)
@@ -119,30 +120,40 @@ public class Student extends Application {
         else
             setMajor("(not set)");
     }
-    public void findStudent(String emailToFind){
+    public void findStudent(MyCallback myCallback){
         // new db instance
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         // new collection reference
         CollectionReference studentsRef = db.collection("Students");
         // new query (a bunch of dumb BS)
         studentsRef
-                .whereEqualTo("Email", emailToFind)
+                .whereEqualTo("Email", email)
                 .limit(1)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
+                            Map<String, Object> data = new HashMap<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                String id = document.getId();
-                                Map<String, Object> data = document.getData();
-                                Log.d("findStudent", id + " => " + data);
-                                setStudentFromDB(data);
+                                data = document.getData();
+
+                                /*data.put("Email", email);
+                                data.put("FirstName", document.get("FirstName"));
+                                data.put("LastName", document.get("LastName"));
+                                data.put("Courses", document.get("Courses"));
+                                data.put("Bio", document.get("Bio"));
+                                data.put("Major", document.get("Major"));*/
+                                Log.d("Student.findStudent", data.toString());
 
                             }
-                        }
+                            myCallback.onCallback(data);
+                        } else
+                            Log.d("Student.findStudent", "Error finding documents");
                     }
                 });
 
+
     }
+
 }
