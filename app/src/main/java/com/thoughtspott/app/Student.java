@@ -5,15 +5,22 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Student extends Application {
     private String email;
@@ -59,8 +66,9 @@ public class Student extends Application {
     public void setMajor(String m){
         major = m;
     }
+
     public void writeToDB(){
-        HashMap<String, Object> student = new HashMap<>();     // create HashMap for easy db writing
+        Map<String, Object> student = new HashMap<>();     // create HashMap for easy db writing
         //List clist = Arrays.asList(courses);
         // put all info in map
         student.put("Email", email);
@@ -86,5 +94,46 @@ public class Student extends Application {
                         Log.w("Student.java", "Error adding document to Students", e);
                     }
                 });
+    }
+    public void setStudentFromDB(Map<String, Object> s){
+        email = s.get("email").toString();
+        nameFirst = s.get("FirstName").toString();
+        nameLast = s.get("LastName").toString();
+        courses = (ArrayList<String>) s.get("Courses");
+        bio = s.get("bio").toString();
+        major = s.get("major").toString();
+    }
+    public void findStudent(String emailToFind){
+        // new db instance
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        // new collection reference
+        CollectionReference studentsRef = db.collection("Students");
+        // new query (a bunch of dumb BS)
+        Query studentQuery = studentsRef.whereEqualTo("email", emailToFind).limit(1);
+        Task<QuerySnapshot> task = studentQuery.get();
+        QuerySnapshot results = task.getResult();
+        List<DocumentSnapshot> doc = results.getDocuments();
+        // found student put in doc
+        Map<String, Object> studentFound = doc.get(0).getData();
+        // call function to set all info
+        setStudentFromDB(studentFound);
+        ///////////////////////////////////////////////////////////////////////////////////////////
+        /*studentsRef
+            .whereEqualTo("email", emailToFind)
+            .limit(1)
+            .get()
+            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Log.d("findStudent", document.getId() + " => " + document.getData());
+
+                        }
+                    } else {
+                        Log.d("findStudent", "Error getting documents: ", task.getException());
+                    }
+                }
+            });*/
     }
 }

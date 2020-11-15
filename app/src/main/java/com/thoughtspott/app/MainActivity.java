@@ -99,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+                    // find the user in db
+                    user.findStudent(email);
                     Toast.makeText(MainActivity.this,"Successful Log In",Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
                     startActivity(intent);
