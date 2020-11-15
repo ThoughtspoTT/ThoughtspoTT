@@ -17,12 +17,13 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Student extends Application {
+public class Student extends Application implements Serializable {
     private String email;
     private String nameFirst;
     private String nameLast;
@@ -137,13 +138,6 @@ public class Student extends Application {
                             Map<String, Object> data = new HashMap<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 data = document.getData();
-
-                                /*data.put("Email", email);
-                                data.put("FirstName", document.get("FirstName"));
-                                data.put("LastName", document.get("LastName"));
-                                data.put("Courses", document.get("Courses"));
-                                data.put("Bio", document.get("Bio"));
-                                data.put("Major", document.get("Major"));*/
                                 Log.d("Student.findStudent", data.toString());
 
                             }

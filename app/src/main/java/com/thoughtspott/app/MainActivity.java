@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     protected static Student user = new Student();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,35 +49,25 @@ public class MainActivity extends AppCompatActivity {
         LogIn_SI = findViewById(R.id.buttonLogInLI);
         progressDialog = new ProgressDialog(this);
         SignUp_SI= findViewById(R.id.buttonRegisterLI);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
+        //user = new Student();
 
 
         LogIn_SI.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View v){
-
                 Login();
-
             }
-
-
         });
 
-        SignUp_SI.setOnClickListener(new View.OnClickListener(){
 
+        SignUp_SI.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(MainActivity.this, SignupActivity.class);
                 startActivity(intent);
                 finish();
             }
-
-
-
         });
-
     }
 
 
@@ -101,21 +90,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    user.setEmail(email);
-                    // find the user in db
-                    user.findStudent(new MyCallback() {
+                    String successfulEmail = email;
+                    setUserProfile(successfulEmail);
+                    /*Thread thread = new Thread(){
                         @Override
-                        public void onCallback(Map<String, Object> dataResult) {
-                            user.setStudentFromDB(dataResult);
-                            Log.d("MainActivity", "First Name: "+user.getNameFirst());
-                            //user.setNameFirst(dataResult.get("FirstName").toString());
+                        public void run() {
+                            setUserProfile(email);
                         }
-                    });
-
+                    };
+                    thread.start();
+                    while(thread.isAlive());
+                    // after thread is dead,*/
+                    //goToDashboard();
                     Toast.makeText(MainActivity.this,"Successful Log In",Toast.LENGTH_LONG).show();
+                    Log.d("MainActivity->Dashboard", "First Name: " + user.getNameFirst());
                     Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("User", user);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                     finish();
+
 
                 }
                 else{
@@ -127,9 +122,25 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void setUserProfile(String userEmail){
+        user = new Student();
+        user.setEmail(userEmail);
+        // find the user in db
+        user.findStudent(new MyCallback() {
+            @Override
+            public void onCallback(Map<String, Object> dataResult) {
+                user.setStudentFromDB(dataResult);
+                Log.d("MainActivity", "First Name: " + user.getNameFirst());
+            }
+        });
+    }
 
+    private void goToDashboard(){
 
+        Toast.makeText(MainActivity.this,"Successful Log In",Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+        intent.putExtra("User", user);
+        startActivity(intent);
+        finish();
+    }
 }
-
-
-

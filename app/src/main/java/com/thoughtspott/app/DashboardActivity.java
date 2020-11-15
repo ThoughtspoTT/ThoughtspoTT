@@ -3,6 +3,7 @@ package com.thoughtspott.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
@@ -13,11 +14,16 @@ import com.google.firebase.auth.FirebaseAuth;
 public class DashboardActivity extends MainActivity {
     private ImageButton profile, message, map, calendar,addevent, logout;
     private TextView nameText;
+    Intent intent = this.getIntent();
+    Bundle bundle = intent.getExtras();
+    Student user = (Student) bundle.getSerializable("User");
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
-
+        //Log.d("dashboard", user.getNameFirst());
 
         //Map button
         map = (ImageButton) findViewById(R.id.mapbutton);
@@ -73,14 +79,16 @@ public class DashboardActivity extends MainActivity {
         //    }
         //});
 
+        //while(user.getNameFirst() == null);
         // Print user's name test
-        String testing = user.getNameFirst();
-        nameText = (TextView) findViewById(R.id.textView4);
-        nameText.setText(testing);
+        String test = user.getNameFirst();
+        nameText = findViewById(R.id.textView4);
+        nameText.setText(test);
     }
 
     //Logout button
     public void LogOut(){
+        user = null;
         FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
         startActivity(intent);

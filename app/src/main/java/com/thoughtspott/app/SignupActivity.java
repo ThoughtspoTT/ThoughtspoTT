@@ -104,7 +104,6 @@ public class SignupActivity extends MainActivity {
             return;
         }
 
-        //student.email = email;
         user.setEmail(email);
         progressDialog.setMessage("Please Wait...");
         progressDialog.show();
@@ -114,7 +113,7 @@ public class SignupActivity extends MainActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                if(task.isSuccessful()){
                    // add user to db here
-                   user.writeToDB();
+                   //user.writeToDB();
                    Toast.makeText(SignupActivity.this,"Successfully Registered",Toast.LENGTH_LONG).show();
                    Intent intent = new Intent(SignupActivity.this, EnterClasses.class);
                    startActivity(intent);
