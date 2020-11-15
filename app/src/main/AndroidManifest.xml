@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.thoughtspott.app">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -12,11 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EnterClasses"></activity>
+        <activity android:name=".Profile"></activity>
+        <activity android:name=".EnterClasses" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDujnsVl0OA-fdMaNFKO7_Dc7brbvCPszU"></meta-data>
+            android:value="AIzaSyDujnsVl0OA-fdMaNFKO7_Dc7brbvCPszU" />
 
         <activity
             android:name=".MainActivity"
@@ -30,9 +32,8 @@
         <activity android:name=".SignupActivity" />
         <activity android:name=".DashboardActivity" />
         <activity android:name=".MapsActivity" />
-        <activity android:name=".Forum"/>
-        <activity android:name=".Enter_Info"/>
-
+        <activity android:name=".Forum" />
+        <activity android:name=".Enter_Info" />
     </application>
 
 </manifest>

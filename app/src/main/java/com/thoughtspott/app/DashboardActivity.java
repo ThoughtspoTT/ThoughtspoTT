@@ -6,15 +6,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 public class DashboardActivity extends MainActivity {
     private ImageButton profile, message, map, calendar,addevent, logout;
+    private TextView nameText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
+
 
         //Map button
         map = (ImageButton) findViewById(R.id.mapbutton);
@@ -53,13 +56,13 @@ public class DashboardActivity extends MainActivity {
         //});
 
         //Profile button
-        //profile = (ImageButton) findViewById(R.id.profilebutton);
-        //profile.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        openProfileActivity();
-        //    }
-        //});
+        profile = (ImageButton) findViewById(R.id.profilebutton);
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openProfileActivity();
+            }
+        });
 
         //Message button
         //message = (ImageButton) findViewById(R.id.messagebutton);
@@ -69,6 +72,11 @@ public class DashboardActivity extends MainActivity {
         //        openMessageActivity();
         //    }
         //});
+
+        // Print user's name test
+        String testing = user.getNameFirst();
+        nameText = (TextView) findViewById(R.id.textView4);
+        nameText.setText(testing);
     }
 
     //Logout button
@@ -104,8 +112,10 @@ public class DashboardActivity extends MainActivity {
     //}
 
     //Profile button
-    //public void openProfileActivity(){
-    //  Intent ProfileIntent = new Intent(packageContent: this, #######.class);
-    //  startactivity(ProfileIntent);
-    //}
+    public void openProfileActivity(){
+      Intent ProfileIntent = new Intent(this, Profile.class);
+      startActivity(ProfileIntent);
+    }
+
+
 }
