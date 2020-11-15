@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onCallback(Map<String, Object> dataResult) {
                             user.setStudentFromDB(dataResult);
-                            Log.d("MainActivity", dataResult.toString());
+                            Log.d("MainActivity", "First Name: "+user.getNameFirst());
                             //user.setNameFirst(dataResult.get("FirstName").toString());
                         }
                     });
