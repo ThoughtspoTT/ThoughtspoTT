@@ -95,13 +95,29 @@ public class Student extends Application {
                     }
                 });
     }
-    public void setStudentFromDB(Map<String, Object> s){
-        email = s.get("email").toString();
-        nameFirst = s.get("FirstName").toString();
-        nameLast = s.get("LastName").toString();
-        courses = (ArrayList<String>) s.get("Courses");
-        bio = s.get("bio").toString();
-        major = s.get("major").toString();
+    private void setStudentFromDB(Map<String, Object> s){
+        setEmail(s.get("Email").toString());
+        setCourses((ArrayList<String>) s.get("Courses"));
+
+        if(s.get("FirstName") != null)
+            setNameFirst(s.get("FirstName").toString());
+        else
+            setNameFirst("(not set)");
+
+        if(s.get("LastName") != null)
+            setNameLast(s.get("LastName").toString());
+        else
+            setNameLast("(not set)");
+
+        if(s.get("Bio") != null)
+            setBio(s.get("Bio").toString());
+        else
+            setBio("(not set)");
+
+        if(s.get("Major") != null)
+            setMajor(s.get("Major").toString());
+        else
+            setMajor("(not set)");
     }
     public void findStudent(String emailToFind){
         // new db instance
@@ -109,31 +125,24 @@ public class Student extends Application {
         // new collection reference
         CollectionReference studentsRef = db.collection("Students");
         // new query (a bunch of dumb BS)
-        Query studentQuery = studentsRef.whereEqualTo("email", emailToFind).limit(1);
-        Task<QuerySnapshot> task = studentQuery.get();
-        QuerySnapshot results = task.getResult();
-        List<DocumentSnapshot> doc = results.getDocuments();
-        // found student put in doc
-        Map<String, Object> studentFound = doc.get(0).getData();
-        // call function to set all info
-        setStudentFromDB(studentFound);
-        ///////////////////////////////////////////////////////////////////////////////////////////
-        /*studentsRef
-            .whereEqualTo("email", emailToFind)
-            .limit(1)
-            .get()
-            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Log.d("findStudent", document.getId() + " => " + document.getData());
+        studentsRef
+                .whereEqualTo("Email", emailToFind)
+                .limit(1)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                String id = document.getId();
+                                Map<String, Object> data = document.getData();
+                                Log.d("findStudent", id + " => " + data);
+                                setStudentFromDB(data);
 
+                            }
                         }
-                    } else {
-                        Log.d("findStudent", "Error getting documents: ", task.getException());
                     }
-                }
-            });*/
+                });
+
     }
 }

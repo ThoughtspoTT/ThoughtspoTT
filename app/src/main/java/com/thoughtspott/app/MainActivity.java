@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-
         progressDialog.setMessage("Please Wait...");
         progressDialog.show();
         progressDialog.setCanceledOnTouchOutside(false);
