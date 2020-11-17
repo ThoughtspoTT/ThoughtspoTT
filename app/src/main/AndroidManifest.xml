@@ -14,8 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Profile"></activity>
-        <activity android:name=".EnterClasses" />
-
+        <activity android:name=".EnterClasses"></activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDujnsVl0OA-fdMaNFKO7_Dc7brbvCPszU" />
