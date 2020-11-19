@@ -1,0 +1,45 @@
+Index: app/src/main/java/com/thoughtspott/app/messaging.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.thoughtspott.app;\n\nimport androidx.appcompat.app.AppCompatActivity;\n\nimport android.os.Bundle;\n\npublic class messaging extends AppCompatActivity {\n\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.activity_messaging);\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/thoughtspott/app/messaging.java	(revision 962fa6f793df7fd22029dfd3aaae8a3858f80ef7)
++++ app/src/main/java/com/thoughtspott/app/messaging.java	(date 1605654619000)
+@@ -3,9 +3,10 @@
+ import androidx.appcompat.app.AppCompatActivity;
+ 
+ import android.os.Bundle;
++import android.widget.Button;
+ 
+ public class messaging extends AppCompatActivity {
+-
++    private Button button;
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+Index: app/src/main/res/layout/activity_messaging.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\".messaging\">\n\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_messaging.xml	(revision 962fa6f793df7fd22029dfd3aaae8a3858f80ef7)
++++ app/src/main/res/layout/activity_messaging.xml	(date 1605655196000)
+@@ -6,4 +6,13 @@
+     android:layout_height="match_parent"
+     tools:context=".messaging">
+ 
++    <EditText
++        android:id="@+id/editTextTextPersonName"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:ems="5"
++        android:inputType="textPersonName"
++        android:text="Chats"
++        tools:layout_editor_absoluteX="29dp"
++        tools:layout_editor_absoluteY="78dp" />
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
