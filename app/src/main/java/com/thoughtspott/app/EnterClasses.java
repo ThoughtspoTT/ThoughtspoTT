@@ -1,15 +1,13 @@
 package com.thoughtspott.app;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.google.firebase.database.DataSnapshot;
@@ -23,10 +21,11 @@ import java.util.List;
 
 public class EnterClasses extends MainActivity {
 
-    Spinner spinner;
+    Spinner spinner, spinner2;
     DatabaseReference databaseReference;
-    Button enter_class_button;
+    Button enter_class_button,add_course_button;
     List<String> names;
+    ArrayList<String> classInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,33 +33,35 @@ public class EnterClasses extends MainActivity {
         setContentView(R.layout.activity_enter_classes);
 
         spinner = findViewById(R.id.spinner);
+        spinner2 = findViewById(R.id.spinner2);
         names = new ArrayList<>();
+        classInput = new ArrayList<>();
 
+
+//INITIAL SPINNERS
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        databaseReference.child("spinner").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot chilSnap:snapshot.getChildren()) {
-                    String spinnerName =  chilSnap.child("name")!= null ? chilSnap.child("name").getValue(String.class) :null;
-                    if(spinnerName != null) {
-                        names.add(spinnerName);
-                    }
-                }
+        //1st spinner
+        makeSpinnerData("spinner", spinner);
 
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(EnterClasses.this, android.R.layout.simple_spinner_item,names);
-                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-                spinner.setAdapter(arrayAdapter);
+        //2nd spinner: Uses the 1st spinner to choose the 2nd spinner's choices
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String course_chosen = spinner.getSelectedItem().toString();
+                makeSpinnerData(course_chosen,spinner2);
             }
 
-
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
+//END OF INITIAL SPINNERS
+
+
+
+        //Button for adding classes to database
         enter_class_button = findViewById(R.id.button_submit);
-
-
         enter_class_button.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -73,15 +74,32 @@ public class EnterClasses extends MainActivity {
 
         });
 
+        
+        
+        
+        //Button to add another course input
+        add_course_button = findViewById(R.id.button_submit2);
+        add_course_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    
+        
+        //ADD ANOTHER BUTTON TO ADD NEW CLASSES TO DATABASE
     }
+
+
+
+
 
     private void enter_classes(){
 
-        ArrayList<String> classInput = new ArrayList<>();
-
-        //course 1
-        String class1 = spinner.getSelectedItem().toString();
-        classInput.add(class1);
+        String prefix = spinner.getSelectedItem().toString();
+        String number = spinner2.getSelectedItem().toString();
+        String course = prefix + " " + number;
+        classInput.add(course);
 
 
         user.setCourses(classInput);
@@ -89,5 +107,34 @@ public class EnterClasses extends MainActivity {
         startActivity(intent);
         finish();
 
+    }
+
+
+
+
+
+    private void makeSpinnerData(String s, Spinner s2){
+        databaseReference.child(s).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                names = new ArrayList<>();
+                for(DataSnapshot chilSnap:snapshot.getChildren()) {
+                    String spinnerName =  chilSnap.child("name")!= null ? chilSnap.child("name").getValue(String.class) :null;
+                    if(spinnerName != null) {
+                        names.add(spinnerName);
+                    }
+                }
+
+                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(EnterClasses.this, android.R.layout.simple_spinner_item,names);
+                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                s2.setAdapter(arrayAdapter);
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
