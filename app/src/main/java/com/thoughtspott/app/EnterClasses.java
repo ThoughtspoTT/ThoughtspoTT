@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -99,13 +101,18 @@ public class EnterClasses extends MainActivity {
         String prefix = spinner.getSelectedItem().toString();
         String number = spinner2.getSelectedItem().toString();
         String course = prefix + " " + number;
-        classInput.add(course);
-
-
-        user.setCourses(classInput);
-        Intent intent = new Intent(EnterClasses.this, Enter_Info.class);
-        startActivity(intent);
-        finish();
+        if (prefix.equals("Choose a Prefix") )
+        {
+            Toast.makeText(EnterClasses.this,"You must choose a Prefix", Toast.LENGTH_SHORT).show();
+        }else if(number.equals("Choose a Course")){
+            Toast.makeText(EnterClasses.this,"You must choose a Course Number", Toast.LENGTH_SHORT).show();
+        }else {
+            classInput.add(course);
+            user.setCourses(classInput);
+            Intent intent = new Intent(EnterClasses.this, Enter_Info.class);
+            startActivity(intent);
+            finish();
+        }
 
     }
 
