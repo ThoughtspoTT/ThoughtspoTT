@@ -74,7 +74,12 @@ public class EnterClasses extends MainActivity {
             @Override
             public void onClick(View v){
                 enter_classes();
-                displayToast(v);
+
+                //Displays error text in the case that the user did not choose a course prefix and/or number
+                TextView errorText = (TextView)spinner.getSelectedView();
+                TextView errorText2 = (TextView)spinner2.getSelectedView();
+                errorText2.setError("Please select a Course Number");
+                errorText.setError("Please select a Course Prefix");
             }
         });
 
@@ -96,9 +101,6 @@ public class EnterClasses extends MainActivity {
         //ADD ANOTHER BUTTON TO ADD NEW CLASSES TO DATABASE
     }
 
-    public void displayToast(View v){
-        Toast.makeText(EnterClasses.this, "Please select both a Course Prefix and Number", Toast.LENGTH_SHORT).show();
-    }
 
 
     private void enter_classes(){
