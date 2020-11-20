@@ -74,12 +74,6 @@ public class EnterClasses extends MainActivity {
             @Override
             public void onClick(View v){
                 enter_classes();
-
-                //Displays error text in the case that the user did not choose a course prefix and/or number
-                TextView errorText = (TextView)spinner.getSelectedView();
-                TextView errorText2 = (TextView)spinner2.getSelectedView();
-                errorText2.setError("Please select a Course Number");
-                errorText.setError("Please select a Course Prefix");
             }
         });
 
@@ -111,7 +105,13 @@ public class EnterClasses extends MainActivity {
 
         if (prefix.equals("Choose a Prefix") )
         {
+            TextView errorText = (TextView)spinner.getSelectedView();
+            errorText.setError("");
+            TextView errorText2 = (TextView)spinner2.getSelectedView();
+            errorText2.setError("");
         }else if(number.equals("Choose a Course")){
+            TextView errorText2 = (TextView)spinner2.getSelectedView();
+            errorText2.setError("");
         }else {
             classInput.add(course);
             user.setCourses(classInput);
