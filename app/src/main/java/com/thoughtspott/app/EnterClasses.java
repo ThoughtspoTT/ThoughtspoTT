@@ -1,9 +1,15 @@
 package com.thoughtspott.app;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -65,16 +71,14 @@ public class EnterClasses extends MainActivity {
         //Button for adding classes to database
         enter_class_button = findViewById(R.id.button_submit);
         enter_class_button.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View v){
-
                 enter_classes();
-
+                displayToast(v);
             }
-
-
         });
+
+
 
         
         
@@ -83,7 +87,7 @@ public class EnterClasses extends MainActivity {
         add_course_button = findViewById(R.id.button_submit2);
         add_course_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v){
 
             }
         });
@@ -92,8 +96,9 @@ public class EnterClasses extends MainActivity {
         //ADD ANOTHER BUTTON TO ADD NEW CLASSES TO DATABASE
     }
 
-
-
+    public void displayToast(View v){
+        Toast.makeText(EnterClasses.this, "Please select both a Course Prefix and Number", Toast.LENGTH_SHORT).show();
+    }
 
 
     private void enter_classes(){
@@ -101,11 +106,10 @@ public class EnterClasses extends MainActivity {
         String prefix = spinner.getSelectedItem().toString();
         String number = spinner2.getSelectedItem().toString();
         String course = prefix + " " + number;
+
         if (prefix.equals("Choose a Prefix") )
         {
-            Toast.makeText(EnterClasses.this,"You must choose a Prefix", Toast.LENGTH_SHORT).show();
         }else if(number.equals("Choose a Course")){
-            Toast.makeText(EnterClasses.this,"You must choose a Course Number", Toast.LENGTH_SHORT).show();
         }else {
             classInput.add(course);
             user.setCourses(classInput);
