@@ -171,6 +171,7 @@ public class EnterClasses extends MainActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         //spinner choices
         databaseReference.child(s).addValueEventListener(new ValueEventListener() {
+            List typeList;
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 names = new ArrayList<>();
@@ -181,8 +182,7 @@ public class EnterClasses extends MainActivity {
                     }
                 }
                 ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(EnterClasses.this, android.R.layout.simple_spinner_item,names);
-
-                //arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
                 //arrayAdapter.clear();
                 //arrayAdapter.addAll(names);
                 arrayAdapter.notifyDataSetChanged();
