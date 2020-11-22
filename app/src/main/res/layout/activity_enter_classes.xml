@@ -25,12 +25,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <Button
-            android:id="@+id/button_submit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Finalize Courses" />
 
         <Button
             android:id="@+id/button_submit2"
@@ -39,11 +33,18 @@
             android:layout_weight="1"
             android:text="Another Course?" />
 
-    </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Don't See Your Course?" />
 
+    </LinearLayout>
     <Button
+        android:id="@+id/button_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Don't See a Course?" />
+        android:text="Finalize Courses" />
+
 
 </LinearLayout>
