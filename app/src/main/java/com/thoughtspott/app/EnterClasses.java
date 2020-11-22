@@ -30,6 +30,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.Boolean.TRUE;
+
 public class EnterClasses extends MainActivity {
 
     private LinearLayout mLinearLayout;
@@ -45,7 +47,7 @@ public class EnterClasses extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_classes);
 
-
+        View sample;
         names = new ArrayList<>();
         classInput = new ArrayList<>();
         mSpinners = new ArrayList<>();
@@ -56,29 +58,35 @@ public class EnterClasses extends MainActivity {
 
 
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        //INITIAL SPINNERS
-        //1st initial spinner
-        spinner = makeSpinnerData("spinner");
-        mLinearLayout.addView(spinner);
-        //2nd spinner
-        spinner2 = makeSpinnerData("Choose a Prefix");
-        mLinearLayout.addView(spinner2);
+            databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String course_chosen = spinner.getSelectedItem().toString();
-                spinner2 = makeSpinnerData(course_chosen);
-                //mLinearLayout.addView(spinner2);
-            }
+            //INITIAL SPINNERS
+            //1st initial spinner
+            spinner = makeSpinnerData("spinner");
+            mSpinners.add(spinner);
+            mLinearLayout.addView(spinner);
+            //2nd spinner
+            spinner2 = makeSpinnerData("Choose a Prefix");
+            mSpinners.add(spinner2);
+            mLinearLayout.addView(spinner2);
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    spinner2.setVisibility(View.GONE);
+                    String course_chosen = spinner.getSelectedItem().toString();
+                    spinner2 = makeSpinnerData(course_chosen);
+                    mSpinners.set(mSpinners.size()-1,spinner2);
+                    mLinearLayout.addView(spinner2);
+                }
 
-            }
-        });
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
         //END OF INITIAL SPINNERS
 
 
@@ -87,28 +95,45 @@ public class EnterClasses extends MainActivity {
         add_course_button = findViewById(R.id.button_submit2);
         add_course_button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                //1st spinner
-                spinner = makeSpinnerData("spinner");
-                mLinearLayout.addView(spinner);
-                //2nd spinner
-                spinner2 = makeSpinnerData("Choose a Prefix");
-                mLinearLayout.addView(spinner2);
+            public void onClick(View v) {
+                String prefix = spinner.getSelectedItem().toString();
+                String number = spinner2.getSelectedItem().toString();
+                if (prefix.equals("Choose a Prefix")) {
+                    TextView errorText = (TextView) spinner.getSelectedView();
+                    errorText.setError("");
+                    TextView errorText2 = (TextView) spinner2.getSelectedView();
+                    errorText2.setError("");
+                } else if (number.equals("Choose a Course")) {
+                    TextView errorText2 = (TextView) spinner2.getSelectedView();
+                    errorText2.setError("");
+                } else {
+                    //1st spinner
+                    spinner = makeSpinnerData("spinner");
+                    mSpinners.add(spinner);
+                    mLinearLayout.addView(spinner);
 
-                //2nd spinner: Uses the 1st spinner to choose the 2nd spinner's choices
-                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        String course_chosen = spinner.getSelectedItem().toString();
-                        spinner2 = makeSpinnerData(course_chosen);
-                        // mLinearLayout.addView(spinner2);
-                    }
+                    //2nd spinner
+                    spinner2 = makeSpinnerData("Choose a Prefix");
+                    mSpinners.add(spinner2);
+                    mLinearLayout.addView(spinner2);
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
+                    //2nd spinner: Uses the 1st spinner to choose the 2nd spinner's choices
+                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            String course_chosen = spinner.getSelectedItem().toString();
+                            spinner2.setVisibility(View.GONE);
+                            spinner2 = makeSpinnerData(course_chosen);
+                            mSpinners.set(mSpinners.size() - 1, spinner2);
+                            mLinearLayout.addView(spinner2);
+                        }
 
-                    }
-                });
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+                }
             }
         });
 
@@ -128,17 +153,17 @@ public class EnterClasses extends MainActivity {
 
 
     private void enter_classes(){
-        String course_chosen = makeSpinnerData("spinner").getSelectedItem().toString();
-        String prefix = makeSpinnerData("spinner").getSelectedItem().toString();
-        String number = makeSpinnerData(course_chosen).getSelectedItem().toString();
-        if (prefix.equals("Choose a Prefix") )
+        String prefix = spinner.getSelectedItem().toString();
+        String number = spinner2.getSelectedItem().toString();
+        if (prefix.equals("Choose a Prefix"))
         {
-            TextView errorText = (TextView)makeSpinnerData("spinner").getSelectedView();
+            TextView errorText = (TextView)spinner.getSelectedView();
             errorText.setError("");
-            TextView errorText2 = (TextView)makeSpinnerData(course_chosen).getSelectedView();
+            TextView errorText2 = (TextView)spinner2.getSelectedView();
             errorText2.setError("");
         }else if(number.equals("Choose a Course")){
-            TextView errorText2 = (TextView)makeSpinnerData(course_chosen).getSelectedView();
+            TextView errorText2 = (TextView)spinner2
+                    .getSelectedView();
             errorText2.setError("");
         }else {
             for (int i = 0; i < mSpinners.size(); i=i+2) {      // Read all spinners
@@ -161,41 +186,41 @@ public class EnterClasses extends MainActivity {
 
 
 
-    private Spinner makeSpinnerData(String s){
-        Spinner spin = new Spinner(this, Spinner.MODE_DROPDOWN);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        spin.setLayoutParams(layoutParams);
+    private Spinner makeSpinnerData(String s) {
+        //while (TRUE) {
+            Spinner spin = new Spinner(this, Spinner.MODE_DROPDOWN);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            spin.setLayoutParams(layoutParams);
 
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-        //spinner choices
-        databaseReference.child(s).addValueEventListener(new ValueEventListener() {
-            List typeList;
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                names = new ArrayList<>();
-                for(DataSnapshot chilSnap:snapshot.getChildren()) {
-                    String spinnerName =  chilSnap.child("name")!= null ? chilSnap.child("name").getValue(String.class) :null;
-                    if(spinnerName != null) {
-                        names.add(spinnerName);
-                    }
+            databaseReference = FirebaseDatabase.getInstance().getReference();
+            //spinner choices
+            databaseReference.child(s).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    names = new ArrayList<>();
+                    for (DataSnapshot chilSnap : snapshot.getChildren()) {
+                        String spinnerName = chilSnap.child("name") != null ? chilSnap.child("name").getValue(String.class) : null;
+                        if (spinnerName != null) {
+                            names.add(spinnerName);
+                        }
+                    }          
+                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(EnterClasses.this, android.R.layout.simple_spinner_item, names);
+                    arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+                    arrayAdapter.setNotifyOnChange(TRUE);
+                    spin.setAdapter(arrayAdapter);
+  //                  mSpinners.add(spin);
                 }
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(EnterClasses.this, android.R.layout.simple_spinner_item,names);
-                arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-                //arrayAdapter.clear();
-                //arrayAdapter.addAll(names);
-                arrayAdapter.notifyDataSetChanged();
-                spin.setAdapter(arrayAdapter);
-                mSpinners.add(spin);
-            }
 
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-        return spin;
+                }
+            });
+            return spin;
+        //}
+        //return null;
     }
 }
