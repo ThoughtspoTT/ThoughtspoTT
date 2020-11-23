@@ -1,0 +1,23 @@
+Index: app/src/main/res/layout/activity_messaging.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\".messaging\">\n\n    <EditText\n        android:id=\"@+id/editTextTextPersonName\"\n        android:layout_width=\"wrap_content\"\n        android:layout_height=\"wrap_content\"\n        android:ems=\"5\"\n        android:inputType=\"textPersonName\"\n        android:text=\"Chats\"\n        tools:layout_editor_absoluteX=\"29dp\"\n        tools:layout_editor_absoluteY=\"78dp\" />\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_messaging.xml	(revision 2363a7e208b6045c252aac57e8c0d49e822f75ed)
++++ app/src/main/res/layout/activity_messaging.xml	(date 1605775536000)
+@@ -15,4 +15,12 @@
+         android:text="Chats"
+         tools:layout_editor_absoluteX="29dp"
+         tools:layout_editor_absoluteY="78dp" />
++
++    <ImageView
++        android:id="@+id/imageView"
++        android:layout_width="156dp"
++        android:layout_height="100dp"
++        app:srcCompat="@drawable/ic_home_black_24dp"
++        tools:layout_editor_absoluteX="73dp"
++        tools:layout_editor_absoluteY="986dp" />
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file

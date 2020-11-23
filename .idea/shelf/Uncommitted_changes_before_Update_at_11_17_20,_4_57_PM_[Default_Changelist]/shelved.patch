@@ -1,0 +1,154 @@
+Index: app/src/main/java/com/thoughtspott/app/messaging.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.thoughtspott.app;\n\nimport androidx.appcompat.app.AppCompatActivity;\n\nimport android.os.Bundle;\n\npublic class messaging extends AppCompatActivity {\n\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.activity_messaging);\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/thoughtspott/app/messaging.java	(revision 962fa6f793df7fd22029dfd3aaae8a3858f80ef7)
++++ app/src/main/java/com/thoughtspott/app/messaging.java	(date 1605469965000)
+@@ -1,7 +1,6 @@
+ package com.thoughtspott.app;
+ 
+ import androidx.appcompat.app.AppCompatActivity;
+-
+ import android.os.Bundle;
+ 
+ public class messaging extends AppCompatActivity {
+Index: app/src/main/res/layout/activity_messaging.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    tools:context=\".messaging\">\n\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_messaging.xml	(revision 962fa6f793df7fd22029dfd3aaae8a3858f80ef7)
++++ app/src/main/res/layout/activity_messaging.xml	(date 1605469965000)
+@@ -1,9 +1,10 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
++<androidx.constraintlayout.widget.ConstraintLayout
++    xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:tools="http://schemas.android.com/tools"
++    xmlns:app="http://schemas.android.com/apk/res-auto"
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     tools:context=".messaging">
+ 
+-</androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
++  </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/thoughtspott/app/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.thoughtspott.app;\n\n// qwertyuiop\n\n\nimport android.app.ProgressDialog;\nimport android.content.Intent;\nimport android.os.Bundle;\nimport android.text.TextUtils;\nimport android.util.Log;\nimport android.util.Patterns;\nimport android.view.View;\nimport android.widget.Button;\nimport android.widget.EditText;\nimport android.widget.TextView;\nimport android.widget.Toast;\n\nimport com.google.android.gms.tasks.OnCompleteListener;\nimport com.google.android.gms.tasks.Task;\nimport com.google.android.material.bottomnavigation.BottomNavigationView;\nimport com.google.firebase.auth.AuthResult;\nimport com.google.firebase.auth.FirebaseAuth;\nimport com.google.firebase.firestore.FirebaseFirestore;\n\nimport androidx.annotation.NonNull;\nimport androidx.appcompat.app.AppCompatActivity;\nimport androidx.navigation.NavController;\nimport androidx.navigation.Navigation;\nimport androidx.navigation.ui.AppBarConfiguration;\nimport androidx.navigation.ui.NavigationUI;\n\nimport java.util.Map;\n\npublic class MainActivity extends AppCompatActivity {\n\n    private EditText email_SI, password_SI;\n    private Button SignUp_SI, LogIn_SI;\n    private ProgressDialog progressDialog;\n    private FirebaseAuth firebaseAuth;\n    protected static Student user = new Student();\n\n\n    @Override\n    protected void onCreate(Bundle savedInstanceState) {\n        super.onCreate(savedInstanceState);\n        setContentView(R.layout.log_in);\n        firebaseAuth = FirebaseAuth.getInstance();\n        email_SI = findViewById(R.id.editTextEmailLI);\n        password_SI = findViewById(R.id.editTextPasswordLI);\n        LogIn_SI = findViewById(R.id.buttonLogInLI);\n        progressDialog = new ProgressDialog(this);\n        SignUp_SI= findViewById(R.id.buttonRegisterLI);\n        FirebaseFirestore db = FirebaseFirestore.getInstance();\n\n\n\n        LogIn_SI.setOnClickListener(new View.OnClickListener(){\n\n            @Override\n            public void onClick(View v){\n\n                Login();\n\n            }\n\n\n        });\n\n        SignUp_SI.setOnClickListener(new View.OnClickListener(){\n\n            @Override\n            public void onClick(View v){\n                Intent intent = new Intent(MainActivity.this, SignupActivity.class);\n                startActivity(intent);\n                finish();\n            }\n\n\n\n        });\n\n    }\n\n\n    private void Login(){\n        String email = email_SI.getText().toString();\n        String password = password_SI.getText().toString();\n        if(TextUtils.isEmpty(email)){\n            email_SI.setError(\"Enter Your Email\");\n            return;\n        }\n        else if(TextUtils.isEmpty(password)){\n            password_SI.setError(\"Enter Your Password\");\n            return;\n        }\n\n        progressDialog.setMessage(\"Please Wait...\");\n        progressDialog.show();\n        progressDialog.setCanceledOnTouchOutside(false);\n        firebaseAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {\n            @Override\n            public void onComplete(@NonNull Task<AuthResult> task) {\n                if(task.isSuccessful()){\n                    user.setEmail(email);\n                    // find the user in db\n                    user.findStudent(new MyCallback() {\n                        @Override\n                        public void onCallback(Map<String, Object> dataResult) {\n                            user.setStudentFromDB(dataResult);\n                            Log.d(\"MainActivity\", \"First Name: \"+user.getNameFirst());\n                            //user.setNameFirst(dataResult.get(\"FirstName\").toString());\n                        }\n                    });\n\n                    Toast.makeText(MainActivity.this,\"Successful Log In\",Toast.LENGTH_LONG).show();\n                    Intent intent = new Intent(MainActivity.this, DashboardActivity.class);\n                    startActivity(intent);\n                    finish();\n\n                }\n                else{\n                    Toast.makeText(MainActivity.this,\"Log In fail!\",Toast.LENGTH_LONG).show();\n                }\n                progressDialog.dismiss();\n            }\n        });\n\n    }\n\n\n\n}\n\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/thoughtspott/app/MainActivity.java	(revision 962fa6f793df7fd22029dfd3aaae8a3858f80ef7)
++++ app/src/main/java/com/thoughtspott/app/MainActivity.java	(date 1605469965000)
+@@ -40,6 +40,7 @@
+     protected static Student user = new Student();
+ 
+ 
++
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\n  <component name=\"GradleSettings\">\n    <option name=\"linkedExternalProjectsSettings\">\n      <GradleProjectSettings>\n        <option name=\"testRunner\" value=\"PLATFORM\" />\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\n        <option name=\"gradleJvm\" value=\"1.8\" />\n        <option name=\"modules\">\n          <set>\n            <option value=\"$PROJECT_DIR$\" />\n            <option value=\"$PROJECT_DIR$/app\" />\n          </set>\n        </option>\n        <option name=\"resolveModulePerSourceSet\" value=\"false\" />\n        <option name=\"useQualifiedModuleNames\" value=\"true\" />\n      </GradleProjectSettings>\n    </option>\n    <option name=\"offlineMode\" value=\"true\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/gradle.xml	(revision 962fa6f793df7fd22029dfd3aaae8a3858f80ef7)
++++ .idea/gradle.xml	(date 1605482937000)
+@@ -18,6 +18,5 @@
+         <option name="useQualifiedModuleNames" value="true" />
+       </GradleProjectSettings>
+     </option>
+-    <option name="offlineMode" value="true" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: app/src/main/res/layout/dashboard.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\n    xmlns:tools=\"http://schemas.android.com/tools\"\n    android:id=\"@+id/button\"\n    android:layout_width=\"match_parent\"\n    android:layout_height=\"match_parent\"\n    android:orientation=\"horizontal\">\n\n    <androidx.coordinatorlayout.widget.CoordinatorLayout\n        android:layout_width=\"match_parent\"\n        android:layout_height=\"match_parent\"\n        tools:context=\".Homepage\">\n\n        <androidx.constraintlayout.widget.ConstraintLayout\n            android:id=\"@+id/textviewWelcome\"\n            android:layout_width=\"match_parent\"\n            android:layout_height=\"match_parent\"\n            android:paddingTop=\"?attr/actionBarSize\">\n\n            <include\n                android:id=\"@+id/ForumView\"\n                layout=\"@layout/activity_forum\"\n                android:layout_width=\"252dp\"\n                android:layout_height=\"499dp\"\n                android:layout_marginBottom=\"50dp\"\n                app:layout_constraintBottom_toBottomOf=\"parent\"\n                app:layout_constraintEnd_toEndOf=\"parent\"\n                app:layout_constraintHorizontal_bias=\"0.62\"\n                app:layout_constraintStart_toStartOf=\"parent\"\n                app:layout_constraintTop_toTopOf=\"parent\"\n                app:layout_constraintVertical_bias=\"0.53\" />\n\n            <TextView\n                android:id=\"@+id/ThoughtspoTT\"\n                android:layout_width=\"wrap_content\"\n                android:layout_height=\"wrap_content\"\n                android:layout_marginBottom=\"660dp\"\n                android:text=\"ThoughtspoTT\"\n                android:textSize=\"24sp\"\n                android:visibility=\"visible\"\n                app:layout_constraintBottom_toBottomOf=\"parent\"\n                app:layout_constraintEnd_toEndOf=\"parent\"\n                app:layout_constraintStart_toStartOf=\"parent\"\n                app:layout_constraintTop_toTopOf=\"parent\"\n                tools:visibility=\"visible\" />\n\n            <ImageButton\n                android:id=\"@+id/addeventbutton\"\n                android:layout_width=\"59dp\"\n                android:layout_height=\"52dp\"\n                android:layout_marginBottom=\"50dp\"\n                android:background=\"#CB0000\"\n                android:src=\"@android:drawable/ic_menu_add\"\n                android:tint=\"#000000\"\n                android:visibility=\"visible\"\n                app:layout_constraintBottom_toBottomOf=\"parent\"\n                app:layout_constraintEnd_toEndOf=\"@+id/ThoughtspoTT\"\n                app:layout_constraintStart_toStartOf=\"@+id/ThoughtspoTT\"\n                tools:visibility=\"visible\" />\n\n            <ImageButton\n                android:id=\"@+id/profilebutton\"\n                android:layout_width=\"61dp\"\n                android:layout_height=\"47dp\"\n                android:layout_marginEnd=\"204dp\"\n                android:layout_marginRight=\"204dp\"\n                android:background=\"#CB0000\"\n                android:src=\"@android:drawable/ic_menu_my_calendar\"\n                android:tint=\"#000000\"\n                android:visibility=\"visible\"\n                app:layout_constraintBottom_toTopOf=\"@+id/messagebutton\"\n                app:layout_constraintEnd_toEndOf=\"@+id/ThoughtspoTT\"\n                app:layout_constraintTop_toTopOf=\"parent\"\n                app:layout_constraintVertical_bias=\"0.512\"\n                tools:visibility=\"visible\" />\n\n            <ImageButton\n                android:id=\"@+id/logoutbutton\"\n                android:layout_width=\"55dp\"\n                android:layout_height=\"49dp\"\n                android:layout_marginBottom=\"8dp\"\n                android:background=\"#CB0000\"\n                android:src=\"@android:drawable/ic_lock_power_off\"\n                android:tint=\"#000000\"\n                android:visibility=\"visible\"\n                app:layout_constraintBottom_toTopOf=\"@+id/addeventbutton\"\n                app:layout_constraintEnd_toEndOf=\"@+id/mapbutton\"\n                app:layout_constraintHorizontal_bias=\"1.0\"\n                app:layout_constraintStart_toStartOf=\"@+id/mapbutton\"\n                tools:visibility=\"visible\" />\n\n            <ImageButton\n                android:id=\"@+id/calendarbutton\"\n                android:layout_width=\"57dp\"\n                android:layout_height=\"50dp\"\n                android:layout_marginBottom=\"68dp\"\n                android:background=\"#CB0000\"\n                android:src=\"@android:drawable/ic_menu_today\"\n                android:tint=\"#000000\"\n                android:visibility=\"visible\"\n                app:layout_constraintBottom_toTopOf=\"@+id/mapbutton\"\n                app:layout_constraintEnd_toEndOf=\"@+id/messagebutton\"\n                app:layout_constraintHorizontal_bias=\"0.0\"\n                app:layout_constraintStart_toStartOf=\"@+id/messagebutton\"\n                tools:visibility=\"visible\" />\n\n            <ImageButton\n                android:id=\"@+id/messagebutton\"\n                android:layout_width=\"57dp\"\n                android:layout_height=\"47dp\"\n                android:layout_marginBottom=\"56dp\"\n                android:background=\"#CB0000\"\n                android:src=\"@android:drawable/sym_action_chat\"\n                android:tint=\"#000000\"\n                android:visibility=\"visible\"\n                app:layout_constraintBottom_toTopOf=\"@+id/calendarbutton\"\n                app:layout_constraintEnd_toEndOf=\"@+id/profilebutton\"\n                app:layout_constraintHorizontal_bias=\"0.0\"\n                app:layout_constraintStart_toStartOf=\"@+id/profilebutton\"\n                tools:visibility=\"visible\" />\n\n            <ImageButton\n                android:id=\"@+id/mapbutton\"\n                android:layout_width=\"55dp\"\n                android:layout_height=\"50dp\"\n                android:layout_marginBottom=\"60dp\"\n                android:background=\"#CB0000\"\n                android:src=\"@android:drawable/ic_dialog_map\"\n                android:tint=\"#000000\"\n                android:visibility=\"visible\"\n                app:layout_constraintBottom_toTopOf=\"@+id/logoutbutton\"\n                app:layout_constraintEnd_toEndOf=\"@+id/calendarbutton\"\n                app:layout_constraintHorizontal_bias=\"0.652\"\n                app:layout_constraintStart_toStartOf=\"@+id/calendarbutton\"\n                tools:visibility=\"visible\" />\n\n            <TextView\n                android:id=\"@+id/textView4\"\n                android:layout_width=\"wrap_content\"\n                android:layout_height=\"wrap_content\"\n                android:layout_marginBottom=\"14dp\"\n                android:text=\"textView4\"\n                android:textColor=\"#3F51B5\"\n                android:textSize=\"24sp\"\n                android:visibility=\"visible\"\n                app:layout_constraintBottom_toTopOf=\"@+id/ForumView\"\n                app:layout_constraintEnd_toEndOf=\"parent\"\n                app:layout_constraintStart_toStartOf=\"parent\"\n                app:layout_constraintTop_toBottomOf=\"@+id/ThoughtspoTT\"\n                app:layout_constraintVertical_bias=\"0.0\"\n                tools:visibility=\"visible\" />\n\n\n        </androidx.constraintlayout.widget.ConstraintLayout>\n\n    </androidx.coordinatorlayout.widget.CoordinatorLayout>\n\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/dashboard.xml	(revision 962fa6f793df7fd22029dfd3aaae8a3858f80ef7)
++++ app/src/main/res/layout/dashboard.xml	(date 1605469965000)
+@@ -26,10 +26,10 @@
+                 android:layout_marginBottom="50dp"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+-                app:layout_constraintHorizontal_bias="0.62"
++                app:layout_constraintHorizontal_bias="0.622"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent"
+-                app:layout_constraintVertical_bias="0.53" />
++                app:layout_constraintVertical_bias="0.714" />
+ 
+             <TextView
+                 android:id="@+id/ThoughtspoTT"
+@@ -41,8 +41,10 @@
+                 android:visibility="visible"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
++                app:layout_constraintHorizontal_bias="0.498"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent"
++                app:layout_constraintVertical_bias="1.0"
+                 tools:visibility="visible" />
+ 
+             <ImageButton
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n    package=\"com.thoughtspott.app\">\n\n    <uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\" />\n    <uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\" />\n    <uses-permission android:name=\"android.permission.INTERNET\" />\n\n    <application\n        android:allowBackup=\"true\"\n        android:icon=\"@mipmap/ic_launcher\"\n        android:label=\"@string/app_name\"\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\n        android:supportsRtl=\"true\"\n        android:theme=\"@style/AppTheme\">\n        <activity android:name=\".Profile\"></activity>\n        <activity android:name=\".EnterClasses\" />\n\n        <meta-data\n            android:name=\"com.google.android.geo.API_KEY\"\n            android:value=\"AIzaSyDujnsVl0OA-fdMaNFKO7_Dc7brbvCPszU\" />\n\n        <activity\n            android:name=\".MainActivity\"\n            android:label=\"@string/app_name\">\n            <intent-filter>\n                <action android:name=\"android.intent.action.MAIN\" />\n\n                <category android:name=\"android.intent.category.LAUNCHER\" />\n            </intent-filter>\n        </activity>\n        <activity android:name=\".SignupActivity\" />\n        <activity android:name=\".DashboardActivity\" />\n        <activity android:name=\".MapsActivity\" />\n        <activity android:name=\".Forum\" />\n        <activity android:name=\".Enter_Info\" />\n    </application>\n\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/AndroidManifest.xml	(revision 962fa6f793df7fd22029dfd3aaae8a3858f80ef7)
++++ app/src/main/AndroidManifest.xml	(date 1605469966000)
+@@ -2,7 +2,6 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+     package="com.thoughtspott.app">
+ 
+-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+     <uses-permission android:name="android.permission.INTERNET" />
+ 
+@@ -13,12 +12,11 @@
+         android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
+         android:theme="@style/AppTheme">
+-        <activity android:name=".Profile"></activity>
+-        <activity android:name=".EnterClasses" />
++        <activity android:name=".EnterClasses"></activity>
+ 
+         <meta-data
+             android:name="com.google.android.geo.API_KEY"
+-            android:value="AIzaSyDujnsVl0OA-fdMaNFKO7_Dc7brbvCPszU" />
++            android:value="AIzaSyDujnsVl0OA-fdMaNFKO7_Dc7brbvCPszU"></meta-data>
+ 
+         <activity
+             android:name=".MainActivity"
+@@ -32,8 +30,9 @@
+         <activity android:name=".SignupActivity" />
+         <activity android:name=".DashboardActivity" />
+         <activity android:name=".MapsActivity" />
+-        <activity android:name=".Forum" />
+-        <activity android:name=".Enter_Info" />
++        <activity android:name=".Forum"/>
++        <activity android:name=".Enter_Info"/>
++
+     </application>
+ 
+ </manifest>
+\ No newline at end of file
