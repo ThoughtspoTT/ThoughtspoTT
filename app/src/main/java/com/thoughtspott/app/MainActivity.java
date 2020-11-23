@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                Intent intent = new Intent(MainActivity.this, EnterClasses.class);
                 startActivity(intent);
                 finish();
             }

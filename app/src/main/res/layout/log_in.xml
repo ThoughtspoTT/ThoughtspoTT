@@ -39,7 +39,7 @@
         <EditText
             android:id="@+id/editTextPasswordLI"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+             android:layout_height="wrap_content"
             android:layout_marginTop="368dp"
             android:layout_marginBottom="319dp"
             android:ems="10"
