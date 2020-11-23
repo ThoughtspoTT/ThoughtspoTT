@@ -21,17 +21,21 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.sql.Timestamp;
+import java.util.HashMap;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient client;
-    Student Jacob = new Student();
-    LatLng latlngtest = new LatLng(33.581410,-101.876037);
-    Timestamp timetest = new Timestamp(2016-11-16);
+
+
+
 
 
 
@@ -107,6 +111,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(test).title("Chemistry").snippet("Created by Ana, 11/2/2020 5:00 PM, Homework 2"));
 
 
+
+
         @SuppressLint("MissingPermission") Task<Location> task = client.getLastLocation();
 
         task.addOnSuccessListener(location -> {
@@ -116,7 +122,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         ,location.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(latLng).title("Location").snippet("You are here"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
+                //mMap.animateCamera( CameraUpdateFactory.zoomTo( 17.0f ) );
 
             }
             else
