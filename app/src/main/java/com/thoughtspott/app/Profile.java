@@ -15,9 +15,9 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String user = FirebaseAuth.getInstance().getUid();
 
         TextView textView = (TextView) findViewById(R.id.textView);
-        textView.setText(String.valueOf(user));
+        textView.setText(user);
     }
 }

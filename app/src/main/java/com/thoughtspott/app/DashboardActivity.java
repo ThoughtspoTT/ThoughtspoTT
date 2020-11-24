@@ -113,7 +113,8 @@ public class DashboardActivity extends MainActivity {
 
     //Profile button
     public void openProfileActivity(){
-      Intent ProfileIntent = new Intent(this, Profile.class);
+     // Intent ProfileIntent = new Intent(this, Profile.class);
+        Intent ProfileIntent = new Intent(this, tabbed_profile.class);
       startActivity(ProfileIntent);
     }
 

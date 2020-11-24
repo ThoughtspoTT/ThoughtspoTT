@@ -26,4 +26,8 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_forum">Forum</string>
+    <string name="title_activity_tabbed_profile">tabbed_profile</string>
+    <string name="tab_text_1">Profile</string>
+    <string name="tab_text_2">Classes</string>
+    <string name="tab_text_3">Bio</string>
 </resources>
