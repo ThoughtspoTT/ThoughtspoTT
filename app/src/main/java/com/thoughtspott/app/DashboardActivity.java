@@ -65,13 +65,13 @@ public class DashboardActivity extends MainActivity {
         });
 
         //Message button
-        //message = (ImageButton) findViewById(R.id.messagebutton);
-        //message.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        openMessageActivity();
-        //    }
-        //});
+        message = (ImageButton) findViewById(R.id.messagebutton);
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMessageActivity();
+            }
+        });
 
     }
 
@@ -102,10 +102,10 @@ public class DashboardActivity extends MainActivity {
     //}
 
     //Message button
-    //public void openMessageActivity(){
-    //  Intent MessageIntent = new Intent(packageContent: this, #######.class);
-    //  startactivity(MessageIntent);
-    //}
+    public void openMessageActivity(){
+      Intent MessageIntent = new Intent(this, launcher.class);
+      startActivity(MessageIntent);
+    }
 
     //Profile button
     public void openProfileActivity(){
