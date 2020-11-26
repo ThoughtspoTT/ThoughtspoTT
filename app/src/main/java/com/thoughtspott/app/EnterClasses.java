@@ -47,6 +47,7 @@ public class EnterClasses extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_classes);
 
+
         View sample;
         names = new ArrayList<>();
         classInput = new ArrayList<>();
@@ -174,8 +175,17 @@ public class EnterClasses extends MainActivity {
                 String course = prefix1 + " " + number1;
                 classInput.add(course);
             }
-            user.setCourses(classInput);
+            //user.setCourses(classInput);
+
+            Intent i = getIntent();
+            Bundle SUbundle = i.getExtras();
+            String uid = (String) SUbundle.get("userID");
+            String email = (String) SUbundle.get("userEmail");
+            Log.d("EnterClasses","UID = "+uid);
             Intent intent = new Intent(EnterClasses.this, Enter_Info.class);
+            intent.putExtra("userID", uid);
+            intent.putExtra("userEmail", email);
+            intent.putExtra("courses", classInput);
             startActivity(intent);
             finish();
         }

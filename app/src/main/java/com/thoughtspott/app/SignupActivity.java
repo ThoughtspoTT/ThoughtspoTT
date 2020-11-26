@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.auth.User;
+
+import java.util.ArrayList;
 
 
 public class SignupActivity extends MainActivity {
@@ -105,7 +110,7 @@ public class SignupActivity extends MainActivity {
         }
 
         //student.email = email;
-        user.setEmail(email);
+        //user.setEmail(email);
         progressDialog.setMessage("Please Wait...");
         progressDialog.show();
         progressDialog.setCanceledOnTouchOutside(false);
@@ -114,9 +119,15 @@ public class SignupActivity extends MainActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                if(task.isSuccessful()){
                    // add user to db here
-                   user.writeToDB();
+                   //user.writeToDB();
                    Toast.makeText(SignupActivity.this,"Successfully Registered",Toast.LENGTH_LONG).show();
                    Intent intent = new Intent(SignupActivity.this, EnterClasses.class);
+                   final FirebaseAuth auth = FirebaseAuth.getInstance();
+                   final FirebaseUser user = auth.getCurrentUser();
+                   final String uid = user.getUid();
+                   Log.d("Signup Activity","UID = "+uid);
+                   intent.putExtra("userEmail",email);
+                   intent.putExtra("userID",uid);
                    startActivity(intent);
                    finish();
 

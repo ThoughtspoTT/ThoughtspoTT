@@ -73,10 +73,6 @@ public class DashboardActivity extends MainActivity {
         //    }
         //});
 
-        // Print user's name test
-        String testing = user.getNameFirst();
-        nameText = (TextView) findViewById(R.id.textView4);
-        nameText.setText(testing);
     }
 
     //Logout button
