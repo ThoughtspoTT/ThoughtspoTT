@@ -1,6 +1,8 @@
 package com.thoughtspott.app;
 
 import android.app.Application;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -27,12 +29,13 @@ import java.util.List;
 import java.util.Map;
 
 @IgnoreExtraProperties
-public class Student {
+public class Student implements Parcelable {
     private String email;
     private String nameFirst;
     private String nameLast;
     private String bio;
-    private List<String> courses;
+    private List<String> courses = new ArrayList<String>() {
+    };
     private String major;
     //private HashMap<String,Object> studentMap;
     
@@ -48,7 +51,7 @@ public class Student {
         this.courses = c;
         this.major = m;
     }
-
+    // GETTERS & SETTERS             ///////////////////////////////////
     public String getEmail(){
         return this.email;
     }
@@ -86,66 +89,88 @@ public class Student {
         this.major = m;
     }
 
+    public Student(int nothing){
+        this.email = "[email not found]";
+        this.nameFirst = "[nameFirst not set]";
+        this.nameLast = "[nameLast not set]";
+        this.major = "[major not set]";
+        this.bio = "[bio not set]";
+        this.courses.add("[courses not set]");
+    }
+    //      PARCELABLE METHODS        //////////////////////////////////
+    public static final Creator<Student> CREATOR
+            = new Creator<Student>(){
+        public Student createFromParcel(Parcel in){
+            return new Student(in);
+        }
+        public Student[] newArray(int size) {
+            return new Student[size];
+        }
+    };
 
-//    public void setStudentFromDB(Map<String, Object> s){
-//        setEmail(s.get("Email").toString());
-//
-//        setCourses((List<String>) s.get("Courses"));
-//
-//        if(s.get("FirstName") != null)
-//            setNameFirst(s.get("FirstName").toString());
-//        else
-//            setNameFirst("(not set)");
-//
-//        if(s.get("LastName") != null)
-//            setNameLast(s.get("LastName").toString());
-//        else
-//            setNameLast("(not set)");
-//
-//        if(s.get("Bio") != null)
-//            setBio(s.get("Bio").toString());
-//        else
-//            setBio("(not set)");
-//
-//        if(s.get("Major") != null)
-//            setMajor(s.get("Major").toString());
-//        else
-//            setMajor("(not set)");
-//    }
-    public void findStudent(MyCallback myCallback){
-        // new db instance
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        // new collection reference
-        CollectionReference studentsRef = db.collection("Students");
-        // new query (a bunch of dumb BS)
-        studentsRef
-                .whereEqualTo("Email", email)
-                .limit(1)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if(task.isSuccessful()){
-                            Map<String, Object> data = new HashMap<>();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                data = document.getData();
-
-                                /*data.put("Email", email);
-                                data.put("FirstName", document.get("FirstName"));
-                                data.put("LastName", document.get("LastName"));
-                                data.put("Courses", document.get("Courses"));
-                                data.put("Bio", document.get("Bio"));
-                                data.put("Major", document.get("Major"));*/
-                                Log.d("Student.findStudent", data.toString());
-
-                            }
-                            myCallback.onCallback(data);
-                        } else
-                            Log.d("Student.findStudent", "Error finding documents");
-                    }
-                });
-
-
+    public Student(Parcel in){
+        this();
+        readFromParcel(in);
     }
 
+    private void readFromParcel(Parcel in){
+        this.email = in.readString();
+        this.nameFirst = in.readString();
+        this.nameLast = in.readString();
+        this.bio = in.readString();
+        in.readStringList(courses);
+        this.major = in.readString();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(email);
+        dest.writeString(nameFirst);
+        dest.writeString(nameLast);
+        dest.writeString(bio);
+        dest.writeString(major);
+        dest.writeStringList(courses);
+
+    }
+// saving just in case
+//    public void findStudent(MyCallback myCallback){
+//        // new db instance
+//        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//        // new collection reference
+//        CollectionReference studentsRef = db.collection("Students");
+//        // new query (a bunch of dumb BS)
+//        studentsRef
+//                .whereEqualTo("Email", email)
+//                .limit(1)
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if(task.isSuccessful()){
+//                            Map<String, Object> data = new HashMap<>();
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                data = document.getData();
+//
+//                                /*data.put("Email", email);
+//                                data.put("FirstName", document.get("FirstName"));
+//                                data.put("LastName", document.get("LastName"));
+//                                data.put("Courses", document.get("Courses"));
+//                                data.put("Bio", document.get("Bio"));
+//                                data.put("Major", document.get("Major"));*/
+//                                Log.d("Student.findStudent", data.toString());
+//
+//                            }
+//                            myCallback.onCallback(data);
+//                        } else
+//                            Log.d("Student.findStudent", "Error finding documents");
+//                    }
+//                });
+//
+//
+//    }
 }

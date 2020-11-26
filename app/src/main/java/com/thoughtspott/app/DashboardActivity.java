@@ -18,6 +18,15 @@ public class DashboardActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
 
+        Intent i = getIntent();
+        Bundle b = i.getExtras();
+        if(b != null) {
+            Student user = (Student) b.get("user");
+            nameText = (TextView) findViewById(R.id.textView4);
+            nameText.setText(user.getNameFirst());
+
+        }
+
 
         //Map button
         map = (ImageButton) findViewById(R.id.mapbutton);
