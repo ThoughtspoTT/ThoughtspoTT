@@ -34,16 +34,29 @@ public class Student implements Parcelable {
     private String nameFirst;
     private String nameLast;
     private String bio;
-    private List<String> courses = new ArrayList<String>() {
-    };
+    private ArrayList<String> courses = new ArrayList<>();
     private String major;
+    private boolean inSession;
     //private HashMap<String,Object> studentMap;
     
     // default constructor required for database getValue calls
     public Student(){
     }
-    // constructor
-    public Student(String e, String nF, String nL, String b, List<String> c, String m){
+
+    // constructor that prevents null values, had to put an argument due to
+    // requirement of default constructor above
+    public Student(int nothing){
+        this.email = "[email not found]";
+        this.nameFirst = "[nameFirst not set]";
+        this.nameLast = "[nameLast not set]";
+        this.major = "[major not set]";
+        this.bio = "[bio not set]";
+        this.courses.add("[courses not set]");
+        this.inSession = false;
+    }
+
+    // constructor for setting values
+    public Student(String e, String nF, String nL, String b, ArrayList<String> c, String m){
         this.email = e;
         this.nameFirst = nF;
         this.nameLast = nL;
@@ -51,6 +64,8 @@ public class Student implements Parcelable {
         this.courses = c;
         this.major = m;
     }
+
+
     // GETTERS & SETTERS             ///////////////////////////////////
     public String getEmail(){
         return this.email;
@@ -58,10 +73,10 @@ public class Student implements Parcelable {
     public void setEmail(String e){
         this.email = e;
     }
-    public List<String> getCourses(){
+    public ArrayList<String> getCourses(){
         return this.courses;
     }
-    public void setCourses(List<String> c){
+    public void setCourses(ArrayList<String> c){
         this.courses = c;
     }
     public String getNameFirst(){
@@ -88,15 +103,13 @@ public class Student implements Parcelable {
     public void setMajor(String m){
         this.major = m;
     }
-
-    public Student(int nothing){
-        this.email = "[email not found]";
-        this.nameFirst = "[nameFirst not set]";
-        this.nameLast = "[nameLast not set]";
-        this.major = "[major not set]";
-        this.bio = "[bio not set]";
-        this.courses.add("[courses not set]");
+    public boolean isInSession() {
+        return inSession;
     }
+    public void setInSession(boolean inSession) {
+        this.inSession = inSession;
+    }
+
     //      PARCELABLE METHODS        //////////////////////////////////
     public static final Creator<Student> CREATOR
             = new Creator<Student>(){
@@ -120,6 +133,7 @@ public class Student implements Parcelable {
         this.bio = in.readString();
         in.readStringList(courses);
         this.major = in.readString();
+
     }
 
     @Override
@@ -137,6 +151,9 @@ public class Student implements Parcelable {
         dest.writeStringList(courses);
 
     }
+
+
+    //      END OF PARCELABLE METHODS   ////////////////////////////////
 // saving just in case
 //    public void findStudent(MyCallback myCallback){
 //        // new db instance

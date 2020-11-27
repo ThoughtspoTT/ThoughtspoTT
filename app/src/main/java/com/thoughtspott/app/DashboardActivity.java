@@ -3,16 +3,29 @@ package com.thoughtspott.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class DashboardActivity extends MainActivity {
-    private ImageButton profile, message, map, calendar,addevent, logout;
+    private ImageButton profile, message, map, calendar,addevent, sessionList, logout;
     private TextView nameText;
+    private Student user;
+    private String uid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,12 +34,9 @@ public class DashboardActivity extends MainActivity {
         Intent i = getIntent();
         Bundle b = i.getExtras();
         if(b != null) {
-            Student user = (Student) b.get("user");
-            nameText = (TextView) findViewById(R.id.textView4);
-            nameText.setText(user.getNameFirst());
-
+            uid = (String) b.get("user ID");
         }
-
+        findStudentForUser(uid);
 
         //Map button
         map = (ImageButton) findViewById(R.id.mapbutton);
@@ -82,6 +92,12 @@ public class DashboardActivity extends MainActivity {
             }
         });
 
+        // Session list button
+        sessionList = (ImageButton) findViewById(R.id.sessionListButton);
+        sessionList.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){ openJoinableSessionsList();}
+        });
     }
 
     //Logout button
@@ -98,6 +114,14 @@ public class DashboardActivity extends MainActivity {
         startActivity(MapIntent);
     }
 
+    // Session list Button
+    public void openJoinableSessionsList(){
+
+        Log.d("Dashboard->SessionsList","Student Name: "+user.getNameFirst());
+        Intent sesh = new Intent(this, JoinableSessionsList.class);
+        sesh.putExtra("user", user);
+        startActivity(sesh);
+    }
     //Add Event button
     //public void openAddEventActivity(){
     //  Intent AddEventIntent = new Intent(packageContent: this, #######.class);
@@ -121,6 +145,35 @@ public class DashboardActivity extends MainActivity {
      // Intent ProfileIntent = new Intent(this, Profile.class);
         Intent ProfileIntent = new Intent(this, tabbed_profile.class);
       startActivity(ProfileIntent);
+    }
+
+    private void findStudentForUser(String userID){
+        DatabaseReference userRef = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child("users")
+                .child(userID);
+        Log.d("findStudentForUser","Starting user retrieval for UID="+userID);
+
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    user = snapshot.getValue(Student.class);
+                    Log.d("findStudentForUser", "User obj updated: "+user.getEmail());
+
+                }
+                else{
+                    Log.d("findStudentForUser", "user data not found");
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("findStudentForUser","Data retrieval canceled: "+error);
+
+            }
+        });
+
     }
 
 

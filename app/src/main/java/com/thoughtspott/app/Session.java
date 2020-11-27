@@ -6,6 +6,11 @@ import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.android.gms.maps.model.LatLng;
@@ -36,7 +41,7 @@ public class Session {
     public void addMember(Student member){
         participants.add(member);
         population++;
-        writeToDB();
+        //update database here!
     }
 
     // true if removed successfully
@@ -45,40 +50,16 @@ public class Session {
             if(participants.get(i) == member){
                 participants.remove(i);
                 population--;
-                writeToDB();
+                // update database here!
                 return true;
             }
         }
         return false;
     }
     public void removeSession(){
-
+        // update database here!
     }
 
-    public void writeToDB(){
-        HashMap<String, Object> session = new HashMap<>();
-        session.put("Course", course);
-        session.put("Creator", creator);
-        session.put("Participants", participants);
-        session.put("Population", population);
-        session.put("Location", location);
-        session.put("TimeStart", timeStart);
-        session.put("Description", description);
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Sessions").document(course+" ("+creator+")")
-                .set(session)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("Session.java", "DocumentSnapshot written successfully");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w("Session.java", "Error adding document to Sessions", e);
-                    }
-                });
-    }
+
 }
