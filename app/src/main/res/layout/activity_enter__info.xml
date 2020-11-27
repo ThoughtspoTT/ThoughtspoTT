@@ -4,22 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background = "@drawable/background2"
     tools:context=".Enter_Info">
 
     <TextView
         android:id="@+id/textView_title_enter_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tell us more about yourself"
-        android:textSize="18sp"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:shadowColor="#999999"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="4"
+        android:text="Tell us more about yourself!"
+        android:textColor="#ffffff"
+        android:textSize="28sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.079"
-
-        />
+        app:layout_constraintVertical_bias="0.079" />
 
     <EditText
         android:id="@+id/editTextFirstName"
@@ -27,12 +34,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="51dp"
         android:ems="10"
+        android:fontFamily="sans-serif-condensed-medium"
         android:hint="First Name"
         android:inputType="textPersonName"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView_title_enter_info"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView_title_enter_info"
+
         app:layout_constraintTop_toBottomOf="@+id/textView_title_enter_info"
         app:layout_constraintVertical_bias="0.005" />
 
@@ -42,8 +54,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:ems="10"
+        android:fontFamily="sans-serif-condensed-medium"
         android:hint="Last Name"
         android:inputType="textPersonName"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/editTextFirstName"
         app:layout_constraintHorizontal_bias="0.0"
@@ -57,8 +73,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:ems="10"
+        android:fontFamily="sans-serif-condensed-medium"
         android:hint="Major"
         android:inputType="textPersonName"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/editTextLastName"
         app:layout_constraintHorizontal_bias="0.0"
@@ -73,24 +93,36 @@
         android:layout_marginTop="48dp"
         android:layout_marginBottom="120dp"
         android:ems="10"
+        android:fontFamily="sans-serif-condensed-medium"
         android:hint="Tell Us About Yourself..."
+        android:inputType="textMultiLine"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/editTextMajor"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/editTextMajor"
         app:layout_constraintTop_toBottomOf="@+id/editTextMajor"
-        app:layout_constraintVertical_bias="0.0"
-        android:inputType="textMultiLine"/>
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/buttonSubmitInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
+        android:background="#C33838"
+        android:drawableBottom="@drawable/al_count_button_shape"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:shadowColor="#221F1F"
         android:text="Submit"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/editTextBiography"
+        app:layout_constraintHorizontal_bias="0.635"
         app:layout_constraintStart_toStartOf="@+id/editTextBiography"
-        app:layout_constraintTop_toBottomOf="@+id/editTextBiography" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextBiography"
+        app:layout_constraintVertical_bias="0.609" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

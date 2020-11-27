@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapsActivity">
+    tools:context=".MapsActivity"
+    android:background = "@drawable/background2">
 
     <androidx.fragment.app.FragmentContainerView
     android:layout_width="match_parent"
@@ -20,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="@string/physics_2pm_study_for_midterm_chemistry_5pm_homework_2"
-        android:background="@drawable/border"/>
+        android:background="#C33838"
+        android:textColor="#ffffff"/>
 
 </RelativeLayout>
