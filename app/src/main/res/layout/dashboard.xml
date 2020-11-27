@@ -45,6 +45,7 @@
                 android:layout_height="70dp"
                 android:layout_marginBottom="184dp"
                 android:background="#CB0000"
+                android:contentDescription="hello"
                 android:src="@android:drawable/ic_menu_add"
                 android:tint="#ffffff"
                 android:visibility="visible"
@@ -53,9 +54,8 @@
                 app:layout_constraintHorizontal_bias="0.558"
                 app:layout_constraintStart_toEndOf="@+id/logoutbutton"
                 app:layout_constraintTop_toBottomOf="@+id/messagebutton"
-                app:layout_constraintVertical_bias="0.974"
-                tools:visibility="visible"
-                android:contentDescription="hello" />
+                app:layout_constraintVertical_bias="0.972"
+                tools:visibility="visible" />
 
             <ImageButton
                 android:id="@+id/profilebutton"
@@ -120,7 +120,7 @@
                 android:layout_height="70dp"
                 android:layout_marginStart="93dp"
                 android:layout_marginLeft="93dp"
-                android:layout_marginTop="51dp"
+                android:layout_marginTop="78dp"
                 android:background="#CB0000"
                 android:src="@android:drawable/sym_action_chat"
                 android:tint="#ffffff"
@@ -130,7 +130,7 @@
                 app:layout_constraintHorizontal_bias="0.126"
                 app:layout_constraintStart_toEndOf="@+id/mapbutton"
                 app:layout_constraintTop_toBottomOf="@+id/calendarbutton"
-                app:layout_constraintVertical_bias="0.07"
+                app:layout_constraintVertical_bias="0.003"
                 tools:visibility="visible" />
 
             <ImageButton
@@ -165,14 +165,18 @@
 
             <ImageButton
                 android:id="@+id/sessionListButton"
-                android:layout_width="87dp"
-                android:layout_height="84dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_marginBottom="68dp"
+                android:background="#CB0000"
+                android:tint="#ffffff"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/addeventbutton"
-                app:layout_constraintHorizontal_bias="0.527"
+                app:layout_constraintHorizontal_bias="0.485"
                 app:layout_constraintStart_toEndOf="@+id/logoutbutton"
-                app:layout_constraintTop_toBottomOf="@+id/logoutbutton" />
+                app:layout_constraintTop_toBottomOf="@+id/logoutbutton"
+                app:layout_constraintVertical_bias="1.0"
+                android:src="@android:drawable/ic_input_get"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
