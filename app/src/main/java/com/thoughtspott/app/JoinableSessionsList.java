@@ -38,13 +38,19 @@ public class JoinableSessionsList extends AppCompatActivity {
         setSupportActionBar(toolbar);
         joinableList = findViewById(R.id.sesh_list);
 
-        Intent i = getIntent();
-        Bundle b = i.getExtras();
-        Student user = (Student) b.get("user");
-        ArrayList<String> userCourses = (ArrayList<String>) user.getCourses();
-        Log.d("SessionsListCreate","One of user's courses is: "+userCourses.get(0));
+//        Intent i = getIntent();
+//        Bundle b = i.getExtras();
+//        Student user = (Student) b.get("user");
 
-        updateSessionList(referencesOfJoinableSessions(userCourses));
+        // Data for the purpose of testing list display
+        ArrayList<String> userCourses = new ArrayList<>();
+        userCourses.add("Item 1");
+        userCourses.add("Item 2");
+        userCourses.add("Item 3");
+        userCourses.add("Item 4");
+        userCourses.add("Item 5");
+
+        //updateSessionList(referencesOfJoinableSessions(userCourses));
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
