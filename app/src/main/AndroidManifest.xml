@@ -81,6 +81,7 @@
         <activity android:name=".Enter_Info" />
         <activity android:name=".launcher" />
         <activity android:name=".messaging" />
+        <activity android:name=".DatabaseClassAdd" />
     </application>
 
 </manifest>

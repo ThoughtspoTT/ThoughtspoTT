@@ -135,7 +135,7 @@ public class DatabaseClassAdd extends AppCompatActivity {
                     if (!(names.contains(prefix_array.get(i))))
                     {
                         rootNode.getReference(prefix_array.get(i)).push().child("name").setValue(number_array.get(i));
-                        rootNode.getReference(prefix_array.get(i));
+                        //rootNode.getReference(prefix_array.get(i)).getDatabase();
                         //child("student").setValue("bob");
                         reference.push().child("name").setValue(prefix_array.get(i));
 //                        rootNode.getReference(prefix_array.get(i)).child("name: 1301").getParent().child("student").setValue("bob");

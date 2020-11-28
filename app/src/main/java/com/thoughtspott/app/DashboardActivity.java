@@ -50,7 +50,7 @@ public class DashboardActivity extends MainActivity {
         //Logout button
         logout = (ImageButton) findViewById(R.id.logoutbutton);
         logout.setOnClickListener(new OnClickListener(){
-        @Override
+            @Override
             public void onClick(View v){
                 LogOut();
             }
@@ -136,15 +136,15 @@ public class DashboardActivity extends MainActivity {
 
     //Message button
     public void openMessageActivity(){
-      Intent MessageIntent = new Intent(this, launcher.class);
-      startActivity(MessageIntent);
+        Intent MessageIntent = new Intent(this, launcher.class);
+        startActivity(MessageIntent);
     }
 
     //Profile button
     public void openProfileActivity(){
-     // Intent ProfileIntent = new Intent(this, Profile.class);
+        // Intent ProfileIntent = new Intent(this, Profile.class);
         Intent ProfileIntent = new Intent(this, tabbed_profile.class);
-      startActivity(ProfileIntent);
+        startActivity(ProfileIntent);
     }
 
     private void findStudentForUser(String userID){
