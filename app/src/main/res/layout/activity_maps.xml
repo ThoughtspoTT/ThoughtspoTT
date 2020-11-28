@@ -19,7 +19,7 @@
         android:id="@+id/text_view_id"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:text="@string/physics_2pm_study_for_midterm_chemistry_5pm_homework_2"
+        android:text=""
         android:background="@drawable/border"/>
 
 </RelativeLayout>

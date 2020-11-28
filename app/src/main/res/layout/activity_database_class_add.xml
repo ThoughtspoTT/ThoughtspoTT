@@ -5,15 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/my_linearLayout"
+    android:id="@+id/DCA"
     android:orientation="vertical"
-    tools:context=".EnterClasses">
+    tools:context=".DatabaseClassAdd">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-    <TextView
+        <TextView
             android:id="@+id/textView_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,31 +21,23 @@
             android:text="Enter Your Courses"
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-
         <Button
-            android:id="@+id/button_submit2"
+            android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Another Course?" />
-
+            android:text="Finalize Courses"
+            android:layout_weight="1" />
         <Button
-            android:id="@+id/button_submit3"
+            android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Don't See Your Course?" />
-
+            android:text="More Courses?"
+            android:layout_weight="1" />
     </LinearLayout>
-    <Button
-        android:id="@+id/button_submit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Finalize Courses" />
-
 
 </LinearLayout>

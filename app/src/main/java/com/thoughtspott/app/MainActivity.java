@@ -6,7 +6,6 @@ package com.thoughtspott.app;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -21,12 +20,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
@@ -37,7 +30,6 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import java.util.Map;
-import java.util.concurrent.Semaphore;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private Button SignUp_SI, LogIn_SI;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
-    protected static Student user = new Student(0);
+    protected static Student user = new Student();
 
 
     @Override
@@ -58,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         LogIn_SI = findViewById(R.id.buttonLogInLI);
         progressDialog = new ProgressDialog(this);
         SignUp_SI= findViewById(R.id.buttonRegisterLI);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
 
@@ -77,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
+                Intent intent = new Intent(MainActivity.this, DatabaseClassAdd.class);
                 startActivity(intent);
                 finish();
             }
@@ -108,16 +101,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    final FirebaseAuth auth = FirebaseAuth.getInstance();
-                    final FirebaseUser userAuth = auth.getCurrentUser();
-                    final String uid = userAuth.getUid();
+
+
                     Toast.makeText(MainActivity.this,"Successful Log In",Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
-
-                    findStudentForUser(uid);
-
-                    intent.putExtra("user", (Parcelable) user);
-                    Log.d("Main->Dashboard", "User: "+user.getEmail());
                     startActivity(intent);
                     finish();
 
@@ -131,34 +118,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void findStudentForUser(String userID){
-        DatabaseReference userRef = FirebaseDatabase
-                .getInstance()
-                .getReference()
-                .child("users")
-                .child(userID);
-        Log.d("yolo swag","Starting user retrieval for UID="+userID);
 
-        //Semaphore semaphore = new Semaphore(0);
-        userRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    user = snapshot.getValue(Student.class);
-                    Log.d("yolo swag", "User obj updated: "+user.getEmail());
-                    //semaphore.release();
-                }
-                else{
-                    Log.d("yolo swag", "user data not found");
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("findStudentForUser","Data retrieval canceled: "+error);
-
-            }
-        });
-        //semaphore.acquire();
-    }
 
 }
+
+
+

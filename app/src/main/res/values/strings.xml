@@ -26,15 +26,4 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="title_activity_forum">Forum</string>
-    <string name="title_activity_tabbed_profile">tabbed_profile</string>
-    <string name="tab_text_1">Profile</string>
-    <string name="tab_text_2">Classes</string>
-    <string name="tab_text_3">Bio</string>
-    <string name="write_a_message">Write a message</string>
-    <string name="todo">TODO</string>
-    <string name="testing">Testing</string>
-    <string name="chemistry_at_5_pm">Chemistry at 5 PM</string>
-    <string name="physics_at_2_pm_study_for_midterm">Physics_at_2_pm_:_study_for_midterm</string>
-    <string name="chemistry_at_5_pm_homework_2">chemistry_at_5_pm_:_Homework_2</string>
-    <string name="physics_2pm_study_for_midterm_chemistry_5pm_homework_2">Physics 2PM: Study for midterm/Chemistry 5PM: Homework 2</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.thoughtspott.app.ui.main;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import androidx.annotation.Nullable;
@@ -19,8 +20,9 @@ import com.thoughtspott.app.R;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-    @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2,R.string.tab_text_3};
+    //@StringRes
+    //private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2,R.string.tab_text_3};
+    @SuppressLint("SupportAnnotationUsage")
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -50,7 +52,8 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return mContext.getResources().getString(TAB_TITLES[position]);
+      //  return mContext.getResources().getString(TAB_TITLES[position]);
+        return null;
     }
 
     @Override

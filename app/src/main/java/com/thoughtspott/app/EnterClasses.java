@@ -37,7 +37,7 @@ public class EnterClasses extends MainActivity {
     private LinearLayout mLinearLayout;
     private ArrayList<Spinner> mSpinners;
     DatabaseReference databaseReference;
-    Button enter_class_button,add_course_button;
+    Button enter_class_button,add_course_button,database_button;
     List<String> names;
     ArrayList<String> classInput;
     Spinner spinner, spinner2;
@@ -56,6 +56,7 @@ public class EnterClasses extends MainActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference();
         spinner = new Spinner(this, Spinner.MODE_DROPDOWN);
         spinner2 = new Spinner(this, Spinner.MODE_DROPDOWN);
+        TextView text = new TextView(this);
 
 
 
@@ -63,6 +64,8 @@ public class EnterClasses extends MainActivity {
             databaseReference = FirebaseDatabase.getInstance().getReference();
 
             //INITIAL SPINNERS
+            text.setText("\nCourse");
+            mLinearLayout.addView(text);
             //1st initial spinner
             spinner = makeSpinnerData("spinner");
             mSpinners.add(spinner);
@@ -108,6 +111,12 @@ public class EnterClasses extends MainActivity {
                     TextView errorText2 = (TextView) spinner2.getSelectedView();
                     errorText2.setError("");
                 } else {
+
+                    //Course text
+                    TextView text = new TextView(EnterClasses.this);
+                    text.setText("\nCourse");
+                    mLinearLayout.addView(text);
+
                     //1st spinner
                     spinner = makeSpinnerData("spinner");
                     mSpinners.add(spinner);
@@ -148,7 +157,28 @@ public class EnterClasses extends MainActivity {
         });
 
 
-        //ADD ANOTHER BUTTON TO ADD NEW CLASSES TO DATABASE
+        //BUTTON TO ADD NEW CLASSES TO DATABASE
+        database_button = findViewById(R.id.button_submit3);
+        database_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < mSpinners.size(); i=i+2) {      // Read all spinners
+                    Spinner spinnerprefix = mSpinners.get(i);
+                    Spinner spinnernumber = mSpinners.get(i+1);
+                    String prefix1 = spinnerprefix.getSelectedItem().toString();
+                    String number1 = spinnernumber.getSelectedItem().toString();
+                    String course = prefix1 + " " + number1;
+                    if(!((prefix1.equals("Choose a Prefix"))||(number1.equals("Choose a Course"))))
+                    {
+                        classInput.add(course);
+                    }
+                }
+                user.setCourses(classInput);
+                Intent intent = new Intent(EnterClasses.this, DatabaseClassAdd.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
 
