@@ -8,6 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+
+import java.sql.Timestamp;
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link NewSessionForm#newInstance} factory method to
@@ -60,5 +69,10 @@ public class NewSessionForm extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_new_session_form, container, false);
+    }
+    private void writeNewSession(String course, Student s, LatLng loc, Timestamp t, String desc){
+        Session session = new Session(course, s, loc, t, desc);
+        DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+        db.child("sessions").child(course+" - "+s.getNameFirst()).setValue(session);
     }
 }

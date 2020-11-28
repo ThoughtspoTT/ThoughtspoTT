@@ -76,18 +76,18 @@ public class Enter_Info extends MainActivity {
 
         }
 
-
         String biography_text = biography.getText().toString();
 
         String bio = null;
         if (!TextUtils.isEmpty(biography_text)) {
             bio = biography_text;
         }
+
         Intent ii = getIntent();
         Bundle bundle = ii.getExtras();
         String uid = (String) bundle.get("userID");
         String email = (String) bundle.get("userEmail");
-        List<String> courses = (List<String>) bundle.get("courses");
+        ArrayList<String> courses = (ArrayList<String>) bundle.get("courses");
         Log.d("Enter_Info:enter_info()","UID = "+uid);
 
         writeNewUser(uid, email, first, last, bio, courses, maj);
@@ -95,23 +95,10 @@ public class Enter_Info extends MainActivity {
         startActivity(intent);
         finish();
     }
-    private void writeNewUser(String id,String eml,String fst,String lst,String bio,List<String> crs,String mjr){
-        /*Map<String, Object> user = new HashMap<>();     // create HashMap for easy db writing
-        //List clist = Arrays.asList(courses);
-        // put all info in map
-        user.put("Email", email);
-        user.put("FirstName", nameFirst);
-        user.put("LastName", nameLast);
-        user.put("Courses", courses);
-        user.put("Bio", bio);
-        user.put("Major", major);*/
 
+    private void writeNewUser(String id,String eml,String fst,String lst,String bio,ArrayList<String> crs,String mjr){
         Student user = new Student(eml,fst,lst,bio,crs,mjr);
-
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         db.child("users").child(id).setValue(user);
-
-
     }
-
 }

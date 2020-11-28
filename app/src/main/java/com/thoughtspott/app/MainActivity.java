@@ -6,6 +6,7 @@ package com.thoughtspott.app;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
@@ -20,6 +21,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.annotation.NonNull;
@@ -30,6 +37,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import java.util.Map;
+import java.util.concurrent.Semaphore;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private Button SignUp_SI, LogIn_SI;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
-    protected static Student user = new Student();
+    protected static Student user = new Student(0);
 
 
     @Override
@@ -50,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
         LogIn_SI = findViewById(R.id.buttonLogInLI);
         progressDialog = new ProgressDialog(this);
         SignUp_SI= findViewById(R.id.buttonRegisterLI);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 
 
@@ -70,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(MainActivity.this, DatabaseClassAdd.class);
+                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -101,10 +108,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-
-
+                    final FirebaseAuth auth = FirebaseAuth.getInstance();
+                    final FirebaseUser userAuth = auth.getCurrentUser();
+                    final String uid = userAuth.getUid();
                     Toast.makeText(MainActivity.this,"Successful Log In",Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
+                    Log.d("MainActivity", "jumping to find user function...");
+
+
+
+
+                    intent.putExtra("user ID", uid);
                     startActivity(intent);
                     finish();
 
@@ -121,6 +135,3 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
-
-
-
