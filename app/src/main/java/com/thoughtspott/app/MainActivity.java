@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-                Intent intent = new Intent(MainActivity.this, DatabaseClassAdd.class);
+                Intent intent = new Intent(MainActivity.this, SignupActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -113,12 +113,11 @@ public class MainActivity extends AppCompatActivity {
                     final String uid = userAuth.getUid();
                     Toast.makeText(MainActivity.this,"Successful Log In",Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
-                    Log.d("MainActivity", "jumping to find user function...");
 
+                    findStudentForUser(uid);
 
-
-
-                    intent.putExtra("user ID", uid);
+                    intent.putExtra("user", (Parcelable) user);
+                    Log.d("Main->Dashboard", "User: "+user.getEmail());
                     startActivity(intent);
                     finish();
 
@@ -132,6 +131,34 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void findStudentForUser(String userID){
+        DatabaseReference userRef = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child("users")
+                .child(userID);
+        Log.d("yolo swag","Starting user retrieval for UID="+userID);
 
+        //Semaphore semaphore = new Semaphore(0);
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    user = snapshot.getValue(Student.class);
+                    Log.d("yolo swag", "User obj updated: "+user.getEmail());
+                    //semaphore.release();
+                }
+                else{
+                    Log.d("yolo swag", "user data not found");
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("findStudentForUser","Data retrieval canceled: "+error);
+
+            }
+        });
+        //semaphore.acquire();
+    }
 
 }

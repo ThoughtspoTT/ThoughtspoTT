@@ -58,7 +58,8 @@
             android:launchMode="singleTask"
             android:parentActivityName=".DashboardActivity"
             android:theme="@style/ApplozicTheme"
-            tools:node="replace">
+            tools:node="replace"
+            tools:ignore="MissingClass">
 
             <!-- Parent activity meta-data to support API level 7+ -->
             <meta-data
