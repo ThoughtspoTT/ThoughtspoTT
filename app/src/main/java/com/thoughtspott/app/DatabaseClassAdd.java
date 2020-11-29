@@ -83,6 +83,8 @@ public class DatabaseClassAdd extends AppCompatActivity {
             {
                 enter_classes();
                 add_to_database();
+                prefix_array.add(sprefix);
+                number_array.add(scnumber);
             }
         });
 
@@ -93,10 +95,9 @@ public class DatabaseClassAdd extends AppCompatActivity {
             public void onClick(View v) {
                 sprefix = prefix.getText().toString();
                 scnumber = cnumber.getText().toString();
-                if (!((TextUtils.isEmpty(sprefix)) || (TextUtils.isEmpty(scnumber)))) {
+                if (!((TextUtils.isEmpty(sprefix)) && (TextUtils.isEmpty(scnumber)))) {
                     prefix_array.add(sprefix);
                     number_array.add(scnumber);
-
                     //next Course text
                     TextView text = new TextView(DatabaseClassAdd.this);
                     text.setText("\nCourse");
@@ -137,14 +138,10 @@ public class DatabaseClassAdd extends AppCompatActivity {
 
         if(TextUtils.isEmpty(sprefix)){
             prefix.setError("Enter a Course Prefix");
-            return;
         }
         else if(TextUtils.isEmpty(scnumber)){
             cnumber.setError("Enter a Course Number");
-            return;
         }else {
-            prefix_array.add(sprefix);
-            number_array.add(scnumber);
             reference.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -173,6 +170,7 @@ public class DatabaseClassAdd extends AppCompatActivity {
 
                             }
                         });
+                    }
 
                         for (int j = 0; j < prefix_array.size(); j++) {
                             if ((names.contains(prefix_array.get(j))) && (names2.contains(number_array.get(j)))) {
@@ -186,7 +184,7 @@ public class DatabaseClassAdd extends AppCompatActivity {
                                 reference.push().child("name").setValue(prefix_array.get(j));
                             }
                         }
-                    }
+
                 }
 
                 @Override
