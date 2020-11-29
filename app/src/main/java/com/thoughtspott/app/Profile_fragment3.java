@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import static com.thoughtspott.app.MainActivity.user;
+
 
 public class Profile_fragment3 extends Fragment{
     @Nullable
@@ -21,7 +23,7 @@ public class Profile_fragment3 extends Fragment{
 
 
         TextView bio_text = view.findViewById(R.id.textview_bio);
-        bio_text.setText("Dummy Text");
+        bio_text.setText(user.getBio());
 
         return view;
     }
