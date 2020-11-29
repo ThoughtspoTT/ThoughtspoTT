@@ -31,6 +31,8 @@ public class DashboardActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
 
+        nameText = findViewById(R.id.textView4);
+        nameText.setText("Loading...");
         Intent i = getIntent();
         Bundle b = i.getExtras();
         if(b != null) {
@@ -40,6 +42,7 @@ public class DashboardActivity extends MainActivity {
 
         //Map button
         map = (ImageButton) findViewById(R.id.mapbutton);
+        map.setEnabled(false);
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +79,7 @@ public class DashboardActivity extends MainActivity {
 
         //Profile button
         profile = (ImageButton) findViewById(R.id.profilebutton);
+        profile.setEnabled(false);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +89,7 @@ public class DashboardActivity extends MainActivity {
 
         //Message button
         message = (ImageButton) findViewById(R.id.messagebutton);
+        message.setEnabled(false);
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +99,7 @@ public class DashboardActivity extends MainActivity {
 
         // Session list button
         sessionList = (ImageButton) findViewById(R.id.sessionListButton);
+        sessionList.setEnabled(false);
         sessionList.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){ openJoinableSessionsList();}
@@ -161,7 +167,12 @@ public class DashboardActivity extends MainActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     user = snapshot.getValue(Student.class);
+                    nameText.setText("Hello, "+user.getNameFirst()+"!");
                     Log.d("findStudentForUser", "User obj updated: "+user.getEmail());
+                    map.setEnabled(true);
+                    profile.setEnabled(true);
+                    message.setEnabled(true);
+                    sessionList.setEnabled(true);
 
                 }
                 else{
