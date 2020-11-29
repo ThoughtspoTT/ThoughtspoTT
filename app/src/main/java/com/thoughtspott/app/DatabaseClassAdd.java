@@ -1,5 +1,6 @@
 package com.thoughtspott.app;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -15,7 +16,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.text.InputType;
 import android.text.TextUtils;
+import android.text.method.TextKeyListener;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,7 +39,7 @@ public class DatabaseClassAdd extends AppCompatActivity {
     Button enter_class_button, add_class;
     ArrayList<String> classInput, prefix_array, number_array;
     String sprefix,scnumber;
-    List<String> names;
+    List<String> names,names2;
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
@@ -50,7 +53,9 @@ public class DatabaseClassAdd extends AppCompatActivity {
         mLinearLayout = findViewById(R.id.DCA);
         subtitle = new TextView(this);
         prefix = new EditText(this);
+        prefix.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
         cnumber = new EditText(this);
+        cnumber.setInputType(InputType.TYPE_CLASS_NUMBER);
         prefix_array = new ArrayList<>();
         number_array = new ArrayList<>();
         classInput = new ArrayList<>();
@@ -86,14 +91,21 @@ public class DatabaseClassAdd extends AppCompatActivity {
         add_class.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!((TextUtils.isEmpty(sprefix))|| (TextUtils.isEmpty(scnumber)))) {
-                    //Course text
+                sprefix = prefix.getText().toString();
+                scnumber = cnumber.getText().toString();
+                if (!((TextUtils.isEmpty(sprefix)) || (TextUtils.isEmpty(scnumber)))) {
+                    prefix_array.add(sprefix);
+                    number_array.add(scnumber);
+
+                    //next Course text
                     TextView text = new TextView(DatabaseClassAdd.this);
                     text.setText("\nCourse");
                     mLinearLayout.addView(text);
 
                     prefix = new EditText(DatabaseClassAdd.this);
+                    prefix.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
                     cnumber = new EditText(DatabaseClassAdd.this);
+                    cnumber.setInputType(InputType.TYPE_CLASS_NUMBER);
 
                     //prefix
                     prefix.setHint("Course Prefix?");
@@ -102,6 +114,7 @@ public class DatabaseClassAdd extends AppCompatActivity {
                     //Course number
                     cnumber.setHint("Course Number?");
                     mLinearLayout.addView(cnumber);
+
                 }else{
                     if(TextUtils.isEmpty(sprefix)){
                         prefix.setError("Enter a Course Prefix");
@@ -119,39 +132,69 @@ public class DatabaseClassAdd extends AppCompatActivity {
     public void add_to_database(){
         rootNode = FirebaseDatabase.getInstance();
         reference = rootNode.getReference("spinner");
+        sprefix = prefix.getText().toString();
+        scnumber = cnumber.getText().toString();
 
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                names = new ArrayList<>();
-                for (DataSnapshot chilSnap : snapshot.getChildren()) {
-                    String spinnerName = chilSnap.child("name") != null ? chilSnap.child("name").getValue(String.class) : null;
-                    if (spinnerName != null) {
-                        names.add(spinnerName);
+        if(TextUtils.isEmpty(sprefix)){
+            prefix.setError("Enter a Course Prefix");
+            return;
+        }
+        else if(TextUtils.isEmpty(scnumber)){
+            cnumber.setError("Enter a Course Number");
+            return;
+        }else {
+            prefix_array.add(sprefix);
+            number_array.add(scnumber);
+            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    names = new ArrayList<>();
+                    for (DataSnapshot chilSnap : snapshot.getChildren()) {
+                        String spinnerName = chilSnap.child("name") != null ? chilSnap.child("name").getValue(String.class) : null;
+                        if (spinnerName != null) {
+                            names.add(spinnerName);
+                        }
+                    }
+                    for (int i = 0; i<prefix_array.size(); i++) {
+                        (rootNode.getReference(prefix_array.get(i))).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot1) {
+                                names2 = new ArrayList<>();
+                                for (DataSnapshot chilSnap : snapshot1.getChildren()) {
+                                    String spinnerName = chilSnap.child("name") != null ? chilSnap.child("name").getValue(String.class) : null;
+                                    if (spinnerName != null) {
+                                        names2.add(spinnerName);
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+                        for (int j = 0; j < prefix_array.size(); j++) {
+                            if ((names.contains(prefix_array.get(j))) && (names2.contains(number_array.get(j)))) {
+                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast());
+                            } else if (((names.contains(prefix_array.get(j)))) && (!(names2.contains(number_array.get(j))))) {
+                                rootNode.getReference(prefix_array.get(j)).push().child("name").setValue(number_array.get(j));
+                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast());
+                            } else {
+                                rootNode.getReference(prefix_array.get(j)).push().child("name").setValue(number_array.get(j));
+                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast());
+                                reference.push().child("name").setValue(prefix_array.get(j));
+                            }
+                        }
                     }
                 }
-                //update prefix list aka 'spinner'
-                for (int i = 0; i < prefix_array.size(); i++) {
-                    if (!(names.contains(prefix_array.get(i))))
-                    {
-                        rootNode.getReference(prefix_array.get(i)).push().child("name").setValue(number_array.get(i));
-                        //rootNode.getReference(prefix_array.get(i)).getDatabase();
-                        //child("student").setValue("bob");
-                        reference.push().child("name").setValue(prefix_array.get(i));
-//                        rootNode.getReference(prefix_array.get(i)).child("name: 1301").getParent().child("student").setValue("bob");
-//                        rootNode.getReference(prefix_array.get(i)).child("student").setValue("bob");
-                    }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
                 }
-            }
+            });
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-
-        //update course number list
+        }
         //does the prefix currently have a list?
         //is the course number currently in the prefix list?
     }
@@ -159,8 +202,7 @@ public class DatabaseClassAdd extends AppCompatActivity {
     public void enter_classes(){
         sprefix = prefix.getText().toString();
         scnumber = cnumber.getText().toString();
-        prefix_array.add(sprefix);
-        number_array.add(scnumber);
+
 
         if(TextUtils.isEmpty(sprefix)){
             prefix.setError("Enter a Course Prefix");
@@ -176,10 +218,10 @@ public class DatabaseClassAdd extends AppCompatActivity {
                 String course = sprefix + " " + snumber;
                 classInput.add(course);
             }
-           // user.setCourses(classInput);
-            Intent intent = new Intent(DatabaseClassAdd.this, DashboardActivity.class);
-            startActivity(intent);
-            finish();
+                // user.setCourses(classInput);
+            //Intent intent = new Intent(DatabaseClassAdd.this, DashboardActivity.class);
+            //startActivity(intent);
+            //finish();
         }
     }
 }
