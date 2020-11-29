@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import static com.thoughtspott.app.MainActivity.userCourses;
+
 
 public class Profile_fragment2 extends Fragment{
     @Nullable
@@ -23,19 +25,19 @@ public class Profile_fragment2 extends Fragment{
 
         View view =inflater.inflate(R.layout.fragment2_layout,container,false);
 
-
+        StringBuilder coursesFormat = new StringBuilder();
         // set classes
         TextView class_one = view.findViewById(R.id.textview_class1);
-        class_one.setText("Dummy Text");
-
-        TextView class_two = view.findViewById(R.id.textview_class2);
-        class_two.setText("Dummy Text");
-
-        TextView class_three = view.findViewById(R.id.textview_class3);
-        class_three.setText("Dummy Text");
-
-        TextView class_four = view.findViewById(R.id.textview_class4);
-        class_four.setText("Dummy Text");
+        for(String course : userCourses) coursesFormat.append(course).append('\n').append('\n');
+        class_one.setText(coursesFormat);
+//        TextView class_two = view.findViewById(R.id.textview_class2);
+//        class_two.setText("Dummy Text");
+//
+//        TextView class_three = view.findViewById(R.id.textview_class3);
+//        class_three.setText("Dummy Text");
+//
+//        TextView class_four = view.findViewById(R.id.textview_class4);
+//        class_four.setText("Dummy Text");
 
 
 

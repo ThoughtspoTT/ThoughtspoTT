@@ -1,9 +1,7 @@
 package com.thoughtspott.app;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,13 +18,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-
 public class DashboardActivity extends MainActivity {
     private ImageButton profile, message, map, calendar,addevent, sessionList, logout;
     private TextView nameText;
-    private Student user;
+    //public static Student user;
     private String uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -170,7 +167,9 @@ public class DashboardActivity extends MainActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     user = snapshot.getValue(Student.class);
-                    nameText.setText("Hello, "+user.getNameFirst()+"!");
+                    assert user != null;
+                    userCourses = user.getCourses();
+                    nameText.setText(String.format("Hello, %s!", user.getNameFirst()));
                     Log.d("findStudentForUser", "User obj updated: "+user.getEmail());
                     map.setEnabled(true);
                     profile.setEnabled(true);
