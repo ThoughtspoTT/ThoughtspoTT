@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
                     final FirebaseAuth auth = FirebaseAuth.getInstance();
                     final FirebaseUser userAuth = auth.getCurrentUser();
                     final String uid = userAuth.getUid();
-                    Toast.makeText(MainActivity.this,"Successful Log In",Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this,"Log-in successful",Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(MainActivity.this, DashboardActivity.class);
                     Log.d("MainActivity", "jumping to find user function...");
 

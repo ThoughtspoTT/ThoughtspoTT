@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -109,6 +110,8 @@ public class DashboardActivity extends MainActivity {
     //Logout button
     public void LogOut(){
         FirebaseAuth.getInstance().signOut();
+        Toast.makeText(DashboardActivity.this,"Log-out successful",Toast.LENGTH_LONG).show();
+
         Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
