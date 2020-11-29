@@ -1,5 +1,6 @@
 package com.thoughtspott.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -16,7 +17,7 @@ import android.view.View;
 import com.thoughtspott.app.ui.main.SectionsPagerAdapter;
 
 public class tabbed_profile extends AppCompatActivity {
-
+    Student user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +28,13 @@ public class tabbed_profile extends AppCompatActivity {
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         FloatingActionButton fab = findViewById(R.id.fab);
+
+        Intent pIntent = getIntent();
+        Bundle b = pIntent.getExtras();
+        user = (Student) b.get("user");
+
+
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
