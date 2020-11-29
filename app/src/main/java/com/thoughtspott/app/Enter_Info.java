@@ -1,7 +1,5 @@
 package com.thoughtspott.app;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,7 +12,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Enter_Info extends MainActivity {
 
@@ -92,6 +89,7 @@ public class Enter_Info extends MainActivity {
 
         writeNewUser(uid, email, first, last, bio, courses, maj);
         Intent intent = new Intent(Enter_Info.this, DashboardActivity.class);
+        intent.putExtra("user ID",uid);
         startActivity(intent);
         finish();
     }

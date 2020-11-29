@@ -1,7 +1,6 @@
 package com.thoughtspott.app;
 
 
-import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import static com.thoughtspott.app.MainActivity.user;
 
 
 public class Profile_fragment1 extends Fragment{
@@ -29,13 +31,13 @@ public class Profile_fragment1 extends Fragment{
 
         //set student name
         TextView student_name = view.findViewById(R.id.textviewstudentname);
-        student_name.setText("Dummy Text");
+        student_name.setText(user.getNameFirst());
 
 
         //set student major
 
         TextView student_major = view.findViewById(R.id.textviewstudentmajor);
-        student_major.setText("Dummy Text");
+        student_major.setText(user.getMajor());
 
     //return inflater.inflate(R.layout.fragment1_layout,container,false);
         return view;

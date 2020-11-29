@@ -1,14 +1,13 @@
 package com.thoughtspott.app;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -19,18 +18,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-
 public class DashboardActivity extends MainActivity {
     private ImageButton profile, message, map, calendar,addevent, sessionList, logout;
     private TextView nameText;
-    private Student user;
+    //public static Student user;
     private String uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
 
+        nameText = findViewById(R.id.textView4);
+        nameText.setText("Loading...");
         Intent i = getIntent();
         Bundle b = i.getExtras();
         if(b != null) {
@@ -40,6 +40,7 @@ public class DashboardActivity extends MainActivity {
 
         //Map button
         map = (ImageButton) findViewById(R.id.mapbutton);
+        map.setEnabled(false);
         map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +77,7 @@ public class DashboardActivity extends MainActivity {
 
         //Profile button
         profile = (ImageButton) findViewById(R.id.profilebutton);
+        profile.setEnabled(false);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +87,7 @@ public class DashboardActivity extends MainActivity {
 
         //Message button
         message = (ImageButton) findViewById(R.id.messagebutton);
+        message.setEnabled(false);
         message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +97,7 @@ public class DashboardActivity extends MainActivity {
 
         // Session list button
         sessionList = (ImageButton) findViewById(R.id.sessionListButton);
+        sessionList.setEnabled(false);
         sessionList.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){ openJoinableSessionsList();}
@@ -103,6 +107,8 @@ public class DashboardActivity extends MainActivity {
     //Logout button
     public void LogOut(){
         FirebaseAuth.getInstance().signOut();
+        Toast.makeText(DashboardActivity.this,"Log-out successful",Toast.LENGTH_LONG).show();
+
         Intent intent = new Intent(DashboardActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -142,8 +148,9 @@ public class DashboardActivity extends MainActivity {
 
     //Profile button
     public void openProfileActivity(){
-        // Intent ProfileIntent = new Intent(this, Profile.class);
+
         Intent ProfileIntent = new Intent(this, tabbed_profile.class);
+        ProfileIntent.putExtra("info",user);
         startActivity(ProfileIntent);
     }
 
@@ -160,7 +167,14 @@ public class DashboardActivity extends MainActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     user = snapshot.getValue(Student.class);
+                    assert user != null;
+                    userCourses = user.getCourses();
+                    nameText.setText(String.format("Hello, %s!", user.getNameFirst()));
                     Log.d("findStudentForUser", "User obj updated: "+user.getEmail());
+                    map.setEnabled(true);
+                    profile.setEnabled(true);
+                    message.setEnabled(true);
+                    sessionList.setEnabled(true);
 
                 }
                 else{
