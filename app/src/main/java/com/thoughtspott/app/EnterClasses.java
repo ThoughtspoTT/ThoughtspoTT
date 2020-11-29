@@ -41,6 +41,8 @@ public class EnterClasses extends MainActivity {
     List<String> names;
     ArrayList<String> classInput;
     Spinner spinner, spinner2;
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,18 +164,18 @@ public class EnterClasses extends MainActivity {
         database_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < mSpinners.size(); i=i+2) {      // Read all spinners
-                    Spinner spinnerprefix = mSpinners.get(i);
-                    Spinner spinnernumber = mSpinners.get(i+1);
-                    String prefix1 = spinnerprefix.getSelectedItem().toString();
-                    String number1 = spinnernumber.getSelectedItem().toString();
-                    String course = prefix1 + " " + number1;
-                    if(!((prefix1.equals("Choose a Prefix"))||(number1.equals("Choose a Course"))))
-                    {
-                        classInput.add(course);
-                    }
-                }
-                user.setCourses(classInput);
+                //for (int i = 0; i < mSpinners.size(); i=i+2) {      // Read all spinners
+                  //  Spinner spinnerprefix = mSpinners.get(i);
+                    //Spinner spinnernumber = mSpinners.get(i+1);
+                   // String prefix1 = spinnerprefix.getSelectedItem().toString();
+                    //String number1 = spinnernumber.getSelectedItem().toString();
+                    //String course = prefix1 + " " + number1;
+                    //if(!((prefix1.equals("Choose a Prefix"))&&(number1.equals("Choose a Course"))))
+                  //  {
+                    //    classInput.add(course);
+                    //}
+                //}
+//                user.setCourses(classInput);
                 Intent intent = new Intent(EnterClasses.this, DatabaseClassAdd.class);
                 startActivity(intent);
                 finish();
@@ -193,8 +195,7 @@ public class EnterClasses extends MainActivity {
             TextView errorText2 = (TextView)spinner2.getSelectedView();
             errorText2.setError("");
         }else if(number.equals("Choose a Course")){
-            TextView errorText2 = (TextView)spinner2
-                    .getSelectedView();
+            TextView errorText2 = (TextView)spinner2.getSelectedView();
             errorText2.setError("");
         }else {
             for (int i = 0; i < mSpinners.size(); i=i+2) {      // Read all spinners
@@ -203,9 +204,10 @@ public class EnterClasses extends MainActivity {
                 String prefix1 = spinnerprefix.getSelectedItem().toString();
                 String number1 = spinnernumber.getSelectedItem().toString();
                 String course = prefix1 + " " + number1;
+                rootNode.getReference(course).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast());
                 classInput.add(course);
             }
-            //user.setCourses(classInput);
+
 
             Intent i = getIntent();
             Bundle SUbundle = i.getExtras();
