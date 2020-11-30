@@ -41,8 +41,8 @@ public class EnterClasses extends MainActivity {
     List<String> names;
     ArrayList<String> classInput;
     Spinner spinner, spinner2;
-    FirebaseDatabase rootNode;
-    DatabaseReference reference;
+    FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
+    DatabaseReference reference = rootNode.getReference("spinner");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,13 +198,14 @@ public class EnterClasses extends MainActivity {
             TextView errorText2 = (TextView)spinner2.getSelectedView();
             errorText2.setError("");
         }else {
+
             for (int i = 0; i < mSpinners.size(); i=i+2) {      // Read all spinners
                 Spinner spinnerprefix = mSpinners.get(i);
                 Spinner spinnernumber = mSpinners.get(i+1);
                 String prefix1 = spinnerprefix.getSelectedItem().toString();
                 String number1 = spinnernumber.getSelectedItem().toString();
                 String course = prefix1 + " " + number1;
-                rootNode.getReference(course).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast()+" : "+user.getEmail());
+                rootNode.getReference(course).push().child("student").setValue(user.getEmail());
                 classInput.add(course);
             }
 

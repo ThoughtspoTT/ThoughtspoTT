@@ -174,13 +174,13 @@ public class DatabaseClassAdd extends AppCompatActivity {
 
                         for (int j = 0; j < prefix_array.size(); j++) {
                             if ((names.contains(prefix_array.get(j))) && (names2.contains(number_array.get(j)))) {
-                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast()+" : "+user.getEmail());
+                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getEmail());
                             } else if (((names.contains(prefix_array.get(j)))) && (!(names2.contains(number_array.get(j))))) {
                                 rootNode.getReference(prefix_array.get(j)).push().child("name").setValue(number_array.get(j));
-                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast()+" : "+user.getEmail());
+                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getEmail());
                             } else {
                                 rootNode.getReference(prefix_array.get(j)).push().child("name").setValue(number_array.get(j));
-                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast()+" : "+user.getEmail());
+                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getEmail());
                                 reference.push().child("name").setValue(prefix_array.get(j));
                             }
                         }
@@ -193,8 +193,6 @@ public class DatabaseClassAdd extends AppCompatActivity {
             });
 
         }
-        //does the prefix currently have a list?
-        //is the course number currently in the prefix list?
     }
 
     public void enter_classes(){
@@ -216,10 +214,10 @@ public class DatabaseClassAdd extends AppCompatActivity {
                 String course = sprefix + " " + snumber;
                 classInput.add(course);
             }
-                // user.setCourses(classInput);
-            //Intent intent = new Intent(DatabaseClassAdd.this, DashboardActivity.class);
-            //startActivity(intent);
-            //finish();
+            user.setCourses(classInput);
+            Intent intent = new Intent(DatabaseClassAdd.this, DashboardActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 }
