@@ -38,6 +38,8 @@ public class DatabaseClassAdd extends AppCompatActivity {
     FirebaseDatabase rootNode;
     DatabaseReference reference;
 
+    String email, uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +58,10 @@ public class DatabaseClassAdd extends AppCompatActivity {
         names = new ArrayList<>();
 
 
-
+        Intent i = getIntent();
+        Bundle b = i.getExtras();
+        email = (String) b.get("email");
+        uid = (String) b.get("userID");
         //First course
         //Course subtitle
         subtitle.setText("\nCourse");
@@ -208,9 +213,12 @@ public class DatabaseClassAdd extends AppCompatActivity {
                 String course = sprefix + " " + snumber;
                 classInput.add(course);
             }
-            user.setCourses(classInput);
-            Intent intent = new Intent(DatabaseClassAdd.this, DashboardActivity.class);
-            intent.putExtra("user", user);
+            //user.setCourses(classInput);
+
+            Intent intent = new Intent(DatabaseClassAdd.this, Enter_Info.class);
+            intent.putExtra("userID", uid);
+            intent.putExtra("userEmail", email);
+            intent.putExtra("courses", classInput);
             startActivity(intent);
             finish();
         }
