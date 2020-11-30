@@ -20,7 +20,9 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_joinable_sessions_list" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/content_joinable_sessions_list" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -33,8 +35,10 @@
     <ListView
         android:id="@+id/sesh_list"
         android:layout_width="match_parent"
-        android:layout_height="666dp"
+        android:layout_height="684dp"
         android:background="#E6F44336"
-        android:visibility="visible" />
+        android:visibility="visible"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="center" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
