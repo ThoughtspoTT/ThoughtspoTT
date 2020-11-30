@@ -3,17 +3,13 @@ package com.thoughtspott.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,14 +17,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-public class JoinableSessionsList extends AppCompatActivity {
+public class JoinableSessionsList extends MainActivity {
     ListView joinableList;
     //Student user = new Student(0);
-
+    ArrayAdapter<String> arrayAdapter;
 
     ArrayList<Session> sessions;
     ArrayList<String> sessionsStrings;
-
+    Student user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,30 +32,32 @@ public class JoinableSessionsList extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         joinableList = findViewById(R.id.sesh_list);
+        sessionsStrings = new ArrayList<>();
+        sessionsStrings.add("Loading...");
 
         Intent i = getIntent();
         Bundle b = i.getExtras();
-        Student user = (Student) b.get("user");
-        ArrayList<String> userCourses = user.getCourses();
+        user = (Student) b.get("user");
+
+        Log.d("SessionsList","user: "+user.getNameFirst());
+        Log.d("SessionsList","courses: "+userCourses);
+        updateSessionList(referencesOfJoinableSessions(userCourses));
 
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
+        arrayAdapter = new ArrayAdapter<String>(
                 this,
                 android.R.layout.simple_list_item_1,
-                sessionsStrings );
-
+                sessionsStrings);
         joinableList.setAdapter(arrayAdapter);
 
-        //updateSessionList(referencesOfJoinableSessions(userCourses));
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
     }
 
 
@@ -89,10 +87,12 @@ public class JoinableSessionsList extends AppCompatActivity {
             ref.addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    sessionsStrings.remove("Loading...");
                     Session newSession = snapshot.getValue(Session.class);
 
                     String string = newSession.sessionToFormattedString();
                     sessionsStrings.add(string);
+                    arrayAdapter.notifyDataSetChanged();
                     Log.d("UpdateSessions", "Session added");
                 }
                 @Override
