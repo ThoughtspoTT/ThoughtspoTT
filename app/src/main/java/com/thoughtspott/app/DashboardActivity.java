@@ -100,7 +100,9 @@ public class DashboardActivity extends MainActivity {
         sessionList.setEnabled(false);
         sessionList.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v){ openJoinableSessionsList();}
+            public void onClick(View v){
+                openJoinableSessionsList();
+            }
         });
     }
 
@@ -123,9 +125,10 @@ public class DashboardActivity extends MainActivity {
     // Session list Button
     public void openJoinableSessionsList(){
 
-        Log.d("Dashboard->SessionsList","Student Name: "+user.getNameFirst());
+        Log.d("Dashboard->SessionsList","courses: "+userCourses);
         Intent sesh = new Intent(this, JoinableSessionsList.class);
         sesh.putExtra("user", user);
+        //sesh.putExtra("courses", userCourses);
         startActivity(sesh);
     }
     //Add Event button
@@ -171,6 +174,7 @@ public class DashboardActivity extends MainActivity {
                     userCourses = user.getCourses();
                     nameText.setText(String.format("Hello, %s!", user.getNameFirst()));
                     Log.d("findStudentForUser", "User obj updated: "+user.getEmail());
+                    Log.d("findStudentForUser", "User courses: "+user.getCourses());
                     map.setEnabled(true);
                     profile.setEnabled(true);
                     message.setEnabled(true);
