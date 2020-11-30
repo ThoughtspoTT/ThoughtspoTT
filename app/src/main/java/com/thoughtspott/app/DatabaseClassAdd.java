@@ -20,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.thoughtspott.app.MainActivity.user;
 
@@ -33,7 +32,7 @@ public class DatabaseClassAdd extends AppCompatActivity {
     Button enter_class_button, add_class;
     ArrayList<String> classInput, prefix_array, number_array;
     String sprefix,scnumber;
-    List<String> names,names2;
+    ArrayList<String> names,names2;
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
