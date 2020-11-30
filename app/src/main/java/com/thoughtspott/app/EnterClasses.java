@@ -204,7 +204,7 @@ public class EnterClasses extends MainActivity {
                 String prefix1 = spinnerprefix.getSelectedItem().toString();
                 String number1 = spinnernumber.getSelectedItem().toString();
                 String course = prefix1 + " " + number1;
-                rootNode.getReference(course).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast());
+                rootNode.getReference(course).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast()+" : "+user.getEmail());
                 classInput.add(course);
             }
 
