@@ -174,13 +174,13 @@ public class DatabaseClassAdd extends AppCompatActivity {
 
                         for (int j = 0; j < prefix_array.size(); j++) {
                             if ((names.contains(prefix_array.get(j))) && (names2.contains(number_array.get(j)))) {
-                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast());
+                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast()+" : "+user.getEmail());
                             } else if (((names.contains(prefix_array.get(j)))) && (!(names2.contains(number_array.get(j))))) {
                                 rootNode.getReference(prefix_array.get(j)).push().child("name").setValue(number_array.get(j));
-                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast());
+                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast()+" : "+user.getEmail());
                             } else {
                                 rootNode.getReference(prefix_array.get(j)).push().child("name").setValue(number_array.get(j));
-                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast());
+                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast()+" : "+user.getEmail());
                                 reference.push().child("name").setValue(prefix_array.get(j));
                             }
                         }
