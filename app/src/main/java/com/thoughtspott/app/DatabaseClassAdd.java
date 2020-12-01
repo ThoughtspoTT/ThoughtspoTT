@@ -150,7 +150,8 @@ public class DatabaseClassAdd extends AppCompatActivity {
                             names.add(prefixName);
                         }
                     }
-                    for (int i = 0; i<prefix_array.size(); i++) {
+                    int i;
+                    for ( i = 0; i<prefix_array.size(); i++) {
                         int finalI = i;
                         (rootNode.getReference(prefix_array.get(i))).addValueEventListener(new ValueEventListener() {
                             @Override
