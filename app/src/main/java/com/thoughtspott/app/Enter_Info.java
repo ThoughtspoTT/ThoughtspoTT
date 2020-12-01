@@ -8,16 +8,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class Enter_Info extends MainActivity {
+public class Enter_Info extends AppCompatActivity {
 
     private EditText first_name, last_name, major, biography;
     private Button submit;
-
+    String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +78,7 @@ public class Enter_Info extends MainActivity {
 
         Intent ii = getIntent();
         Bundle bundle = ii.getExtras();
-        String uid = (String) bundle.get("userID");
+        uid = (String) bundle.get("userID");
         String email = (String) bundle.get("userEmail");
         ArrayList<String> courses = (ArrayList<String>) bundle.get("courses");
         Log.d("Enter_Info:enter_info()","UID = "+uid);

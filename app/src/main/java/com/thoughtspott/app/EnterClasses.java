@@ -173,7 +173,7 @@ public class EnterClasses extends MainActivity {
                 //}
 //                user.setCourses(classInput);
                 Intent intent = new Intent(EnterClasses.this, DatabaseClassAdd.class);
-                intent.putExtra("user ID", uid);
+                intent.putExtra("userID", uid);
                 intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
