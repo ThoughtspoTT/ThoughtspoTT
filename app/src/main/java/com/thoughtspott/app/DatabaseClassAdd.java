@@ -145,13 +145,13 @@ public class DatabaseClassAdd extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     names = new ArrayList<>();
                     for (DataSnapshot chilSnap : snapshot.getChildren()) {
-                        String spinnerName = chilSnap.child("name") != null ? chilSnap.child("name").getValue(String.class) : null;
-                        if (spinnerName != null) {
-                            names.add(spinnerName);
+                        String prefixName = chilSnap.child("name") != null ? chilSnap.child("name").getValue(String.class) : null;
+                        if (prefixName != null) {
+                            names.add(prefixName);
                         }
                     }
                     for (int i = 0; i<prefix_array.size(); i++) {
-                        (rootNode.getReference(prefix_array.get(i))).addListenerForSingleValueEvent(new ValueEventListener() {
+                        (rootNode.getReference(prefix_array.get(i))).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot1) {
                                 names2 = new ArrayList<>();
@@ -170,6 +170,8 @@ public class DatabaseClassAdd extends AppCompatActivity {
                         });
                     }
 
+                    if((names != null)&&(names2 != null))
+                    {
                         for (int j = 0; j < prefix_array.size(); j++) {
                             if ((names.contains(prefix_array.get(j))) && (names2.contains(number_array.get(j)))) {
                                 rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getEmail());
@@ -182,7 +184,7 @@ public class DatabaseClassAdd extends AppCompatActivity {
                                 reference.push().child("name").setValue(prefix_array.get(j));
                             }
                         }
-
+                    }
                 }
 
                 @Override
