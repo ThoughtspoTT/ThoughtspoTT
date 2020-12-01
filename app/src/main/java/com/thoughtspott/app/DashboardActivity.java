@@ -139,7 +139,7 @@ public class DashboardActivity extends MainActivity {
 
     //Message button
     public void openMessageActivity(){
-        Intent MessageIntent = new Intent(this, launcher.class);
+        Intent MessageIntent = new Intent(this, messaging.class);
         startActivity(MessageIntent);
     }
 
