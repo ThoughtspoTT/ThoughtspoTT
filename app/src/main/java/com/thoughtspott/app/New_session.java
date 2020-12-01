@@ -92,7 +92,7 @@ public class New_session extends MainActivity {
 
     }
 
-    public void writeNewSession(String c, Student crtr, String t, String d){
+    private void writeNewSession(String c, Student crtr, String t, String d){
         Session newSesh = new Session(c, crtr, null, t, d);
         DatabaseReference db = FirebaseDatabase.getInstance().getReference();
         db.child("sessions").child(c).push().setValue(newSesh);

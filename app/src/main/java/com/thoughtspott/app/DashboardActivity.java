@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +37,8 @@ public class DashboardActivity extends MainActivity {
         if(b != null) {
             uid = (String) b.get("userID");
         }
-        findStudentForUser(uid);
+        if (user == null)
+            findStudentForUser(uid);
 
         //Map button
 

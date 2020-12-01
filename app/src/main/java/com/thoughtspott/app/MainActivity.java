@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Button SignUp_SI, LogIn_SI;
     private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
-    protected static Student user = new Student(0);
+    protected static Student user;
     protected static ArrayList<String> userCourses;
 
 
