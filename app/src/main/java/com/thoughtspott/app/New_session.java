@@ -82,7 +82,7 @@ public class New_session extends MainActivity {
                 user.setInSession(true);
 
                 writeNewSession(selectedCourse,user,timeSelected,description);
-                Toast.makeText(New_session.this,"Time set to " + hour + ":" + minute + " "+ am_pm,Toast.LENGTH_LONG).show();
+                Toast.makeText(New_session.this,"Session Created"+ am_pm,Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(New_session.this, DashboardActivity.class);
                 startActivity(intent);
                 finish();
