@@ -82,9 +82,10 @@ public class Session {
         stringBuilder.append("Members: ")
                 .append(this.getPopulation())
                 .append('\n');
-        stringBuilder.append(this.getDescription());
-//                .append('\n');
-//        stringBuilder.append(this.getTimeStart());
+        stringBuilder.append(this.getDescription())
+                .append('\n');
+        stringBuilder.append("Start time: ")
+                .append(this.getTimeStart());
         return stringBuilder.toString();
     }
 

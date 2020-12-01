@@ -1,5 +1,6 @@
 package com.thoughtspott.app;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -8,8 +9,8 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -18,7 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class New_session extends MainActivity {
 
-    private TextView descriptiontextview;
+    private EditText descriptionEditText;
     private Button create_sessionbutton;
     private Spinner course_spinner;
     private TimePicker picker;
@@ -30,7 +31,7 @@ public class New_session extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_session);
 
-        descriptiontextview = findViewById(R.id.descriptiontextview);
+        descriptionEditText = findViewById(R.id.description_edit_text);
         course_spinner = findViewById(R.id.spinner4);
         create_sessionbutton = findViewById(R.id.createsessionbutton);
         picker =findViewById(R.id.datePicker1);
@@ -72,7 +73,7 @@ public class New_session extends MainActivity {
                 }
                 timeSelected = hour+":"+minute+ " "+am_pm;
 
-                description = descriptiontextview.getText().toString();
+                description = descriptionEditText.getText().toString();
                 if (TextUtils.isEmpty(description))
                     description = "No description";
 
@@ -82,6 +83,9 @@ public class New_session extends MainActivity {
 
                 writeNewSession(selectedCourse,user,timeSelected,description);
                 Toast.makeText(New_session.this,"Time set to " + hour + ":" + minute + " "+ am_pm,Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(New_session.this, DashboardActivity.class);
+                startActivity(intent);
+                finish();
 
             }
         });
