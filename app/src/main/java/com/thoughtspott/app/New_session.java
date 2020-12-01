@@ -79,7 +79,7 @@ public class New_session extends MainActivity {
 
 
 
-
+                user.setInSession(true);
 
                 writeNewSession(selectedCourse,user,timeSelected,description);
                 Toast.makeText(New_session.this,"Time set to " + hour + ":" + minute + " "+ am_pm,Toast.LENGTH_LONG).show();
