@@ -60,7 +60,7 @@
         app:layout_constraintVertical_bias="0.046" />
 
     <TextView
-        android:id="@+id/descriptiontextview"
+        android:id="@+id/description_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"

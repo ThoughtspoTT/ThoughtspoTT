@@ -3,7 +3,6 @@ package com.thoughtspott.app;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.IgnoreExtraProperties;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 
@@ -14,12 +13,12 @@ public class Session {
     private ArrayList<Student> participants = new ArrayList<>();
     private int population;
     private LatLng location;
-    private Timestamp timeStart;
+    private String timeStart;
     private String description;
     // empty constructor required for Firebase
     public Session(){}
     // constructor
-    public Session(String c, Student crtr, LatLng loc, Timestamp time, String desc){
+    public Session(String c, Student crtr, LatLng loc, String time, String desc){
         course = c;
         creator = crtr;
         participants.add(creator);
@@ -65,10 +64,10 @@ public class Session {
     public LatLng getLocation() {
         return this.location;
     }
-    public void setTimeStart(Timestamp tS) {
+    public void setTimeStart(String tS) {
         this.timeStart = tS;
     }
-    public Timestamp getTimeStart() {
+    public String getTimeStart() {
         return this.timeStart;
     }
 
@@ -83,9 +82,10 @@ public class Session {
         stringBuilder.append("Members: ")
                 .append(this.getPopulation())
                 .append('\n');
-        stringBuilder.append(this.getDescription());
-//                .append('\n');
-//        stringBuilder.append(this.getTimeStart());
+        stringBuilder.append(this.getDescription())
+                .append('\n');
+        stringBuilder.append("Start time: ")
+                .append(this.getTimeStart());
         return stringBuilder.toString();
     }
 

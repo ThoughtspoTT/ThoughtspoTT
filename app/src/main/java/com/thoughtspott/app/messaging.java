@@ -25,9 +25,6 @@ public class messaging extends AppCompatActivity {
 
         User user = new User();
         user.setUserId("User"); //userId it can be any unique user identifier NOTE : +,*,? are not allowed chars in user
-        user.setDisplayName("Test");
-        user.setAuthenticationTypeId(User.AuthenticationType.APPLOZIC.getValue());  //User.AuthenticationType.APPLOZIC.getValue() for password verification from Applozic server and User.AuthenticationType.CLIENT.getValue() for access Token verification from your server set access token as password
-        user.setPassword("");
 
         Applozic.connectUser(this, user, new AlLoginHandler() {
 
