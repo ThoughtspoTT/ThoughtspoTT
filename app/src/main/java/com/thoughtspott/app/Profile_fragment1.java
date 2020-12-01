@@ -36,7 +36,7 @@ public class Profile_fragment1 extends Fragment{
 
         //set student major
 
-        TextView student_major = view.findViewById(R.id.textviewstudentmajor);
+        TextView student_major = view.findViewById(R.id.descriptiontextview);
         student_major.setText(user.getMajor());
 
     //return inflater.inflate(R.layout.fragment1_layout,container,false);

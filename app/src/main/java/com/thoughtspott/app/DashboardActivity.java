@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class DashboardActivity extends MainActivity {
-    private ImageButton profile, message, map, calendar,addevent, sessionList, logout;
+    private ImageButton profile, message, map, calendar,addsession, sessionList, logout;
     private TextView nameText;
     //public static Student user;
     private String uid;
@@ -57,23 +58,16 @@ public class DashboardActivity extends MainActivity {
             }
         });
 
-        //Calendar button
-        //calendar = (ImageButton) findViewById(R.id.calendarbutton);
-        //calendar.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        openCalendarActivity();
-        //    }
-        //});
 
-        //Add event button
-        //addevent = (ImageButton) findViewById(R.id.addevent);
-        //addevent.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View v) {
-        //        openAddEventActivity();
-        //    }
-        //});
+
+        //Add new session
+        addsession = (ImageButton) findViewById(R.id.addeventbutton);
+        addsession.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               openCreateSessionActivity();
+           }
+        });
 
         //Profile button
         profile = (ImageButton) findViewById(R.id.profilebutton);
@@ -147,6 +141,13 @@ public class DashboardActivity extends MainActivity {
     public void openMessageActivity(){
         Intent MessageIntent = new Intent(this, launcher.class);
         startActivity(MessageIntent);
+    }
+
+    //add event button
+
+    public void openCreateSessionActivity(){
+        Intent SessionIntent = new Intent(this, New_session.class);
+        startActivity(SessionIntent);
     }
 
     //Profile button

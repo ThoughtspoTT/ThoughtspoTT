@@ -83,6 +83,7 @@
         <activity android:name=".launcher" />
         <activity android:name=".messaging" />
         <activity android:name=".DatabaseClassAdd" />
+        <activity android:name=".New_session"/>
     </application>
 
 </manifest>
