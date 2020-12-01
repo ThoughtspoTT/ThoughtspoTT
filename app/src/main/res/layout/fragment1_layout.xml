@@ -8,7 +8,7 @@
     android:background = "@drawable/background2">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/createsessiontitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -39,11 +39,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.229"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/createsessiontitle"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textViewmajor"
+        android:id="@+id/enterdescriptiontitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="69dp"
@@ -60,7 +60,7 @@
         app:layout_constraintVertical_bias="0.046" />
 
     <TextView
-        android:id="@+id/textviewstudentmajor"
+        android:id="@+id/descriptiontextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -72,6 +72,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.229"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewmajor"
+        app:layout_constraintTop_toBottomOf="@+id/enterdescriptiontitle"
         app:layout_constraintVertical_bias="0.009" />
 </androidx.constraintlayout.widget.ConstraintLayout>

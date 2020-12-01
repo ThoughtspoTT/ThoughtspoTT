@@ -43,6 +43,8 @@
                 android:id="@+id/addeventbutton"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
+                android:layout_marginStart="93dp"
+                android:layout_marginLeft="93dp"
                 android:layout_marginBottom="184dp"
                 android:background="#CB0000"
                 android:contentDescription="hello"
@@ -51,10 +53,10 @@
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.558"
-                app:layout_constraintStart_toEndOf="@+id/logoutbutton"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/mapbutton"
                 app:layout_constraintTop_toBottomOf="@+id/messagebutton"
-                app:layout_constraintVertical_bias="0.972"
+                app:layout_constraintVertical_bias="0.337"
                 tools:visibility="visible" />
 
             <ImageButton
@@ -65,6 +67,7 @@
                 android:layout_marginEnd="132dp"
                 android:layout_marginRight="132dp"
                 android:background="#CB0000"
+                android:contentDescription="hello"
                 android:src="@drawable/profile"
                 android:tint="#ffffff"
                 android:visibility="visible"
@@ -74,8 +77,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ThoughtspoTT"
                 app:layout_constraintVertical_bias="0.0"
-                tools:visibility="visible"
-                android:contentDescription="hello" />
+                tools:visibility="visible" />
 
             <ImageButton
                 android:id="@+id/logoutbutton"
@@ -84,6 +86,7 @@
                 android:layout_marginTop="220dp"
                 android:layout_marginBottom="228dp"
                 android:background="#CB0000"
+                android:contentDescription="hello"
                 android:src="@android:drawable/ic_lock_power_off"
                 android:tint="#ffffff"
                 android:visibility="visible"
@@ -93,26 +96,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profilebutton"
                 app:layout_constraintVertical_bias="0.0"
-                tools:visibility="visible"
-                android:contentDescription="hello" />
-
-            <ImageButton
-                android:id="@+id/calendarbutton"
-                android:layout_width="70dp"
-                android:layout_height="69dp"
-                android:layout_marginTop="97dp"
-                android:background="#CB0000"
-                android:src="@android:drawable/ic_menu_today"
-                android:tint="#ffffff"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.558"
-                app:layout_constraintStart_toEndOf="@+id/profilebutton"
-                app:layout_constraintTop_toBottomOf="@+id/ThoughtspoTT"
-                app:layout_constraintVertical_bias="0.0"
-                tools:visibility="visible"
-                android:contentDescription="hello" />
+                tools:visibility="visible" />
 
             <ImageButton
                 android:id="@+id/messagebutton"
@@ -120,17 +104,17 @@
                 android:layout_height="70dp"
                 android:layout_marginStart="93dp"
                 android:layout_marginLeft="93dp"
-                android:layout_marginTop="78dp"
+                android:layout_marginTop="97dp"
+                android:layout_marginBottom="476dp"
                 android:background="#CB0000"
                 android:src="@android:drawable/sym_action_chat"
                 android:tint="#ffffff"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.126"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/mapbutton"
-                app:layout_constraintTop_toBottomOf="@+id/calendarbutton"
-                app:layout_constraintVertical_bias="0.003"
+                app:layout_constraintTop_toBottomOf="@+id/ThoughtspoTT"
                 tools:visibility="visible" />
 
             <ImageButton
@@ -169,14 +153,14 @@
                 android:layout_height="70dp"
                 android:layout_marginBottom="68dp"
                 android:background="#CB0000"
+                android:src="@android:drawable/ic_input_get"
                 android:tint="#ffffff"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/addeventbutton"
-                app:layout_constraintHorizontal_bias="0.485"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.494"
                 app:layout_constraintStart_toEndOf="@+id/logoutbutton"
-                app:layout_constraintTop_toBottomOf="@+id/logoutbutton"
-                app:layout_constraintVertical_bias="1.0"
-                android:src="@android:drawable/ic_input_get"/>
+                app:layout_constraintTop_toBottomOf="@+id/addeventbutton"
+                app:layout_constraintVertical_bias="0.388" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
