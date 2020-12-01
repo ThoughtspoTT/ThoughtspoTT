@@ -140,7 +140,7 @@ public class DatabaseClassAdd extends AppCompatActivity {
         else if(TextUtils.isEmpty(scnumber)){
             cnumber.setError("Enter a Course Number");
         }else {
-            reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     names = new ArrayList<>();
@@ -150,44 +150,47 @@ public class DatabaseClassAdd extends AppCompatActivity {
                             names.add(prefixName);
                         }
                     }
-                    for (int i = 0; i<prefix_array.size(); i++) {
-                        (rootNode.getReference(prefix_array.get(i))).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot1) {
-                                names2 = new ArrayList<>();
-                                for (DataSnapshot chilSnap : snapshot1.getChildren()) {
-                                    String spinnerName = chilSnap.child("name") != null ? chilSnap.child("name").getValue(String.class) : null;
-                                    if (spinnerName != null) {
-                                        names2.add(spinnerName);
-                                    }
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-
-                            }
-                        });
-
-                        for (int j = 0; j < prefix_array.size(); j++) {
-                            if ((names.contains(prefix_array.get(j))) && (names2.contains(number_array.get(j)))) {
-                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(email);
-                            } else if (((names.contains(prefix_array.get(j)))) && (!(names2.contains(number_array.get(j))))) {
-                                rootNode.getReference(prefix_array.get(j)).push().child("name").setValue(number_array.get(j));
-                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(email);
-                            } else {
-                                rootNode.getReference(prefix_array.get(j)).push().child("name").setValue(number_array.get(j));
-                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(email);
-                                reference.push().child("name").setValue(prefix_array.get(j));
-                            }
-                        }
-                    }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                 }
             });
+
+
+            for (int i = 0; i<prefix_array.size(); i++) {
+
+                (rootNode.getReference(prefix_array.get(i))).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot1) {
+                        names2 = new ArrayList<>();
+                        for (DataSnapshot chilSnap : snapshot1.getChildren()) {
+                            String spinnerName = chilSnap.child("name") != null ? chilSnap.child("name").getValue(String.class) : null;
+                            if (spinnerName != null) {
+                                names2.add(spinnerName);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                for (int j = 0; j < prefix_array.size(); j++) {
+                    if ((names.contains(prefix_array.get(j))) && (names2.contains(number_array.get(j)))) {
+                        rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(email);
+                    } else if (((names.contains(prefix_array.get(j)))) && (!(names2.contains(number_array.get(j))))) {
+                        rootNode.getReference(prefix_array.get(j)).push().child("name").setValue(number_array.get(j));
+                        rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(email);
+                    } else {
+                        rootNode.getReference(prefix_array.get(j)).push().child("name").setValue(number_array.get(j));
+                        rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(email);
+                        reference.push().child("name").setValue(prefix_array.get(j));
+                    }
+                }
+            }
 
         }
     }
