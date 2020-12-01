@@ -30,7 +30,6 @@ public class Enter_Info extends MainActivity {
         biography = findViewById(R.id.editTextBiography);
         submit = findViewById(R.id.buttonSubmitInfo);
 
-
         submit.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -38,13 +37,8 @@ public class Enter_Info extends MainActivity {
 
                 enter_info();
 
-
-
             }
-
-
         });
-
     }
 
 

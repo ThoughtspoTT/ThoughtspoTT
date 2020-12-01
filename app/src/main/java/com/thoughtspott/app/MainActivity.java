@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                    intent.putExtra("user ID", uid);
+                    intent.putExtra("userID", uid);
                     startActivity(intent);
                     finish();
 
