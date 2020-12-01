@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background = "@drawable/background2">
+    android:background="@drawable/background2">
 
     <TextView
         android:id="@+id/createsessiontitle"
@@ -56,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.198"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@+id/spinner4"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -103,10 +102,13 @@
         app:layout_constraintVertical_bias="0.873" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinner4"
         android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_marginTop="25dp"
+        android:background="#E91E63"
+        android:contentDescription="Courses"
+        android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.195"
@@ -124,8 +126,7 @@
         app:layout_constraintBottom_toTopOf="@+id/createsessionbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/entertimetitle"
-       />
+        app:layout_constraintTop_toBottomOf="@+id/entertimetitle" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
