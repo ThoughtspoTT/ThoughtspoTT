@@ -81,6 +81,7 @@
         android:layout_marginTop="30dp"
         android:fontFamily="sans-serif-condensed-medium"
         android:hint="Enter description here..."
+        android:singleLine="true"
         android:textColor="#ffffff"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
