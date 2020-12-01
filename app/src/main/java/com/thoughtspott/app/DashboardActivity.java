@@ -35,7 +35,7 @@ public class DashboardActivity extends MainActivity {
         Intent i = getIntent();
         Bundle b = i.getExtras();
         if(b != null) {
-            uid = (String) b.get("user ID");
+            uid = (String) b.get("userID");
         }
         findStudentForUser(uid);
 

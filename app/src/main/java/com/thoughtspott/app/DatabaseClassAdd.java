@@ -1,32 +1,25 @@
 package com.thoughtspott.app;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.text.InputType;
 import android.text.TextUtils;
-import android.text.method.TextKeyListener;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.thoughtspott.app.MainActivity.user;
 
@@ -39,10 +32,12 @@ public class DatabaseClassAdd extends AppCompatActivity {
     Button enter_class_button, add_class;
     ArrayList<String> classInput, prefix_array, number_array;
     String sprefix,scnumber;
-    List<String> names,names2;
+    ArrayList<String> names,names2;
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
+
+    String email, uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +57,10 @@ public class DatabaseClassAdd extends AppCompatActivity {
         names = new ArrayList<>();
 
 
-
+        Intent i = getIntent();
+        Bundle b = i.getExtras();
+        email = (String) b.get("email");
+        uid = (String) b.get("userID");
         //First course
         //Course subtitle
         subtitle.setText("\nCourse");
@@ -174,13 +172,13 @@ public class DatabaseClassAdd extends AppCompatActivity {
 
                         for (int j = 0; j < prefix_array.size(); j++) {
                             if ((names.contains(prefix_array.get(j))) && (names2.contains(number_array.get(j)))) {
-                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast());
+                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getEmail());
                             } else if (((names.contains(prefix_array.get(j)))) && (!(names2.contains(number_array.get(j))))) {
                                 rootNode.getReference(prefix_array.get(j)).push().child("name").setValue(number_array.get(j));
-                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast());
+                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getEmail());
                             } else {
                                 rootNode.getReference(prefix_array.get(j)).push().child("name").setValue(number_array.get(j));
-                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast());
+                                rootNode.getReference(prefix_array.get(j) + " " + number_array.get(j)).push().child("student").setValue(user.getEmail());
                                 reference.push().child("name").setValue(prefix_array.get(j));
                             }
                         }
@@ -193,8 +191,6 @@ public class DatabaseClassAdd extends AppCompatActivity {
             });
 
         }
-        //does the prefix currently have a list?
-        //is the course number currently in the prefix list?
     }
 
     public void enter_classes(){
@@ -216,10 +212,14 @@ public class DatabaseClassAdd extends AppCompatActivity {
                 String course = sprefix + " " + snumber;
                 classInput.add(course);
             }
-                // user.setCourses(classInput);
-            //Intent intent = new Intent(DatabaseClassAdd.this, DashboardActivity.class);
-            //startActivity(intent);
-            //finish();
+            //user.setCourses(classInput);
+
+            Intent intent = new Intent(DatabaseClassAdd.this, Enter_Info.class);
+            intent.putExtra("userID", uid);
+            intent.putExtra("userEmail", email);
+            intent.putExtra("courses", classInput);
+            startActivity(intent);
+            finish();
         }
     }
 }

@@ -1,16 +1,8 @@
 package com.thoughtspott.app;
 
-import androidx.annotation.NonNull;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,9 +10,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.api.Distribution;
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,9 +33,9 @@ public class EnterClasses extends MainActivity {
     List<String> names;
     ArrayList<String> classInput;
     Spinner spinner, spinner2;
-    FirebaseDatabase rootNode;
-    DatabaseReference reference;
-
+    FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
+    DatabaseReference reference = rootNode.getReference("spinner");
+    String uid, email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +52,10 @@ public class EnterClasses extends MainActivity {
         spinner2 = new Spinner(this, Spinner.MODE_DROPDOWN);
         TextView text = new TextView(this);
 
+        Intent i = getIntent();
+        Bundle bundle = i.getExtras();
+        uid = (String) bundle.get("userID");
+        email = (String) bundle.get("userEmail");
 
 
 
@@ -177,6 +173,8 @@ public class EnterClasses extends MainActivity {
                 //}
 //                user.setCourses(classInput);
                 Intent intent = new Intent(EnterClasses.this, DatabaseClassAdd.class);
+                intent.putExtra("user ID", uid);
+                intent.putExtra("email", email);
                 startActivity(intent);
                 finish();
             }
@@ -198,21 +196,19 @@ public class EnterClasses extends MainActivity {
             TextView errorText2 = (TextView)spinner2.getSelectedView();
             errorText2.setError("");
         }else {
+
             for (int i = 0; i < mSpinners.size(); i=i+2) {      // Read all spinners
                 Spinner spinnerprefix = mSpinners.get(i);
                 Spinner spinnernumber = mSpinners.get(i+1);
                 String prefix1 = spinnerprefix.getSelectedItem().toString();
                 String number1 = spinnernumber.getSelectedItem().toString();
                 String course = prefix1 + " " + number1;
-                rootNode.getReference(course).push().child("student").setValue(user.getNameFirst() + " " + user.getNameLast());
+                rootNode.getReference(course).push().child("student").setValue(user.getEmail());
                 classInput.add(course);
             }
 
 
-            Intent i = getIntent();
-            Bundle SUbundle = i.getExtras();
-            String uid = (String) SUbundle.get("userID");
-            String email = (String) SUbundle.get("userEmail");
+
             Log.d("EnterClasses","UID = "+uid);
             Intent intent = new Intent(EnterClasses.this, Enter_Info.class);
             intent.putExtra("userID", uid);

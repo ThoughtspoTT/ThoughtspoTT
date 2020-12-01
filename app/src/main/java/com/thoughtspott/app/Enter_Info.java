@@ -89,7 +89,7 @@ public class Enter_Info extends MainActivity {
 
         writeNewUser(uid, email, first, last, bio, courses, maj);
         Intent intent = new Intent(Enter_Info.this, DashboardActivity.class);
-        intent.putExtra("user ID",uid);
+        intent.putExtra("userID",uid);
         startActivity(intent);
         finish();
     }
