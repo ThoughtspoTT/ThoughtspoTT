@@ -52,6 +52,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -62,9 +63,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.firebase:firebase-auth:20.0.1'
 
+
+
 }
 
 dependencies {
+
 
 
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
@@ -138,6 +142,8 @@ android {
         api 'com.google.code.gson:gson:2.8.6' //JSON parsing library
         api 'com.google.firebase:firebase-messaging:21.0.0'//for FCM notification
 
+
+
     }
 
     dependencies {
@@ -146,6 +152,13 @@ android {
         implementation 'com.google.firebase:firebase-firestore:22.0.0'
         implementation 'com.google.android.gms:play-services-location:17.1.0'
         implementation 'com.android.support:multidex:2.0.1' //enter the latest version
+    }
+
+
+    dependencies {
+        implementation "androidx.cardview:cardview:1.0.0"
+        implementation "androidx.appcompat:appcompat:1.2.0"
+        implementation "androidx.recyclerview:recyclerview:1.1.0"
     }
     android {
         compileOptions {

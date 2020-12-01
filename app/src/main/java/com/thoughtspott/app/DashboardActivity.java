@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,17 +21,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class DashboardActivity extends MainActivity {
-    private ImageButton profile, message, map, calendar,addsession, sessionList, logout;
+    //private ImageButton profile, message, map, calendar,addsession, sessionList, logout;
     private TextView nameText;
+    private LinearLayout profile, message, map, calendar, addsession,sessionList,logout;
     //public static Student user;
     private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dashboard);
+        setContentView(R.layout.activity_dashboard1);
 
-        nameText = findViewById(R.id.textView4);
+        nameText = findViewById(R.id.textView1);
         nameText.setText("Loading...");
         Intent i = getIntent();
         Bundle b = i.getExtras();
@@ -40,7 +42,8 @@ public class DashboardActivity extends MainActivity {
         findStudentForUser(uid);
 
         //Map button
-        map = (ImageButton) findViewById(R.id.mapbutton);
+
+        map = (LinearLayout) findViewById(R.id.maplayout4);
         map.setEnabled(false);
         map.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +53,7 @@ public class DashboardActivity extends MainActivity {
         });
 
         //Logout button
-        logout = (ImageButton) findViewById(R.id.logoutbutton);
+        logout = (LinearLayout) findViewById(R.id.logoutsess6);
         logout.setOnClickListener(new OnClickListener(){
             @Override
             public void onClick(View v){
@@ -61,7 +64,7 @@ public class DashboardActivity extends MainActivity {
 
 
         //Add new session
-        addsession = (ImageButton) findViewById(R.id.addeventbutton);
+        addsession = (LinearLayout) findViewById(R.id.createsesslayout3);
         addsession.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -70,7 +73,7 @@ public class DashboardActivity extends MainActivity {
         });
 
         //Profile button
-        profile = (ImageButton) findViewById(R.id.profilebutton);
+        profile = (LinearLayout) findViewById(R.id.profilelaylout1);
         profile.setEnabled(false);
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +83,7 @@ public class DashboardActivity extends MainActivity {
         });
 
         //Message button
-        message = (ImageButton) findViewById(R.id.messagebutton);
+        message = (LinearLayout) findViewById(R.id.messagelayout2);
         message.setEnabled(false);
         message.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +93,7 @@ public class DashboardActivity extends MainActivity {
         });
 
         // Session list button
-        sessionList = (ImageButton) findViewById(R.id.sessionListButton);
+        sessionList = (LinearLayout) findViewById(R.id.mysesslayout5);
         sessionList.setEnabled(false);
         sessionList.setOnClickListener(new View.OnClickListener(){
             @Override

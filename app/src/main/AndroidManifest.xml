@@ -17,7 +17,7 @@
         <activity
             android:name=".JoinableSessionsList"
             android:label="@string/title_activity_joinable_sessions_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".tabbed_profile"
             android:label="@string/title_activity_tabbed_profile"
@@ -58,8 +58,8 @@
             android:launchMode="singleTask"
             android:parentActivityName=".DashboardActivity"
             android:theme="@style/ApplozicTheme"
-            tools:node="replace"
-            tools:ignore="MissingClass">
+            tools:ignore="MissingClass"
+            tools:node="replace">
 
             <!-- Parent activity meta-data to support API level 7+ -->
             <meta-data
@@ -83,7 +83,9 @@
         <activity android:name=".launcher" />
         <activity android:name=".messaging" />
         <activity android:name=".DatabaseClassAdd" />
-        <activity android:name=".New_session"/>
+        <activity android:name=".New_session" />
+
+
     </application>
 
 </manifest>
